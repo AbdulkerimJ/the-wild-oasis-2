@@ -30,7 +30,7 @@ const MainNav = () => {
               <span className="text-2xl text-gray-400 transition-all group-hover:text-blue-600">
                 {item.icon}
               </span>
-              <span className="text-gray-600 transition-all group-hover:text-blue-600">
+              <span className="text-gray-600 transition-all">
                 {item.label}
               </span>
             </NavLink>
