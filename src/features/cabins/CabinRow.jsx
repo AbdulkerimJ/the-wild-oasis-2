@@ -1,40 +1,72 @@
-import styled from "styled-components";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { formatCurrency } from "../../utils/helpers";
+import { deleteCabin } from "../../services/apiCabins";
+import toast from "react-hot-toast";
 
-const TableRow = styled.div`
-  display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 2.4rem;
-  align-items: center;
-  padding: 1.4rem 2.4rem;
+export const CabinRow = ({ cabin }) => {
+  const { id, maxCapacity, regularPrice, discount, image } = cabin;
 
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-`;
+  const queryClient = useQueryClient();
 
-const Img = styled.img`
-  display: block;
-  width: 6.4rem;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  object-position: center;
-  transform: scale(1.5) translateX(-7px);
-`;
+  const { isLoading: isDeleting, mutate } = useMutation({
+    mutationFn: deleteCabin,
+    onSuccess: () => {
+      toast.success("Cabin deleted successfully!");
+      queryClient.invalidateQueries({ queryKey: ["cabins"] });
+    },
+    onError: (error) => {
+      toast.error(`Failed to delete cabin: ${error.message}`);
+    },
+  });
 
-const Cabin = styled.div`
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--color-grey-600);
-  font-family: "Sono";
-`;
+  return (
+    <tr className="hover:bg-gray-50 transition-colors duration-200">
+      {/* Cabin Image */}
+      <td className="pl-4 py-3">
+        <div className="w-16 h-12 overflow-hidden rounded-lg shadow-sm">
+          <img
+            src={image}
+            alt={`Cabin ${id}`}
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+      </td>
 
-const Price = styled.div`
-  font-family: "Sono";
-  font-weight: 600;
-`;
+      {/* Cabin Info */}
+      <td className="px-4 py-3 font-medium text-gray-700">{id}</td>
+      <td className="px-4 py-3 text-gray-600">{maxCapacity} guests</td>
+      <td className="px-4 py-3 font-semibold text-gray-800">
+        {formatCurrency(regularPrice)}
+      </td>
+      <td className="px-4 py-3 text-gray-500">
+        {discount > 0 ? (
+          <span className="text-green-600 font-medium">
+            {formatCurrency(discount)}
+          </span>
+        ) : (
+          <span className="text-gray-400 italic">No discount</span>
+        )}
+      </td>
 
-const Discount = styled.div`
-  font-family: "Sono";
-  font-weight: 500;
-  color: var(--color-green-700);
-`;
+      {/* Actions */}
+      <td className="px-4 py-3">
+        <div className="inline-flex gap-2">
+          <button className="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition">
+            Edit
+          </button>
+          <button
+            onClick={() => mutate(id)}
+            disabled={isDeleting}
+            className={`px-3 py-1 text-sm font-medium rounded-lg border transition bg-red-50 text-red-600 border-red-200 hover:bg-red-100
+            `}
+          >
+            {" "}
+            Delete
+          </button>
+        </div>
+      </td>
+    </tr>
+  );
+};
+
+export default CabinRow;

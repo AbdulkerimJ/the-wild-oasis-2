@@ -1,18 +1,24 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import CabinsTable from "../features/cabins/CabinTable";
+import { useQuery } from "@tanstack/react-query";
 import { getCabins } from "../services/apiCabins";
+import Loader from "../ui/Loader";
 
-function Cabins() {
-  useEffect(() => {
-    getCabins().then((data) => {
-      console.log("Cabins data:", data);
-    });
-  }, []);
+const Cabins = () => {
+  const {
+    data: cabins,
+    isLoading,
+  } = useQuery({
+    queryKey: ["cabins"],
+    queryFn: getCabins,
+  });
+
   return (
-    <div className="flex items-center justify-between">
-      <h1 className="text-2xl font-semibold text-gray-800">All cabins</h1>
-      <p className="text-gray-600">TEST</p>
+    <div className="p-6">
+      <h1 className="text-2xl font-semibold mb-8">All cabins</h1>
+      {isLoading ? <Loader /> : <CabinsTable cabins={cabins} />}
     </div>
   );
-}
+};
 
 export default Cabins;
