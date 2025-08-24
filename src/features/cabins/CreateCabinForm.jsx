@@ -1,87 +1,71 @@
-import styled from "styled-components";
-
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
-
-const FormRow = styled.div`
-  display: grid;
-  align-items: center;
-  grid-template-columns: 24rem 1fr 1.2fr;
-  gap: 2.4rem;
-
-  padding: 1.2rem 0;
-
-  &:first-child {
-    padding-top: 0;
-  }
-
-  &:last-child {
-    padding-bottom: 0;
-  }
-
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-
-  &:has(button) {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1.2rem;
-  }
-`;
-
-const Label = styled.label`
-  font-weight: 500;
-`;
-
-const Error = styled.span`
-  font-size: 1.4rem;
-  color: var(--color-red-700);
-`;
+import { useForm } from "react-hook-form";
 
 function CreateCabinForm() {
+
+  const {register, handleSubmit} = useForm();
+  const onSubmit = data => console.log(data);
   return (
-    <Form>
-      <FormRow>
-        <Label htmlFor="name">Cabin name</Label>
-        <Input type="text" id="name" />
-      </FormRow>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      {/* Cabin name */}
+      <div className="grid grid-cols-[24rem_1fr_1.2fr] items-center gap-6 py-3 first:pt-0 last:pb-0 border-b border-gray-200 last:border-none">
+        <label htmlFor="name" className="font-medium">
+          Cabin name
+        </label>
+        <Input type="text" id="name" register= {register} />
+      </div>
 
-      <FormRow>
-        <Label htmlFor="maxCapacity">Maximum capacity</Label>
-        <Input type="number" id="maxCapacity" />
-      </FormRow>
+      {/* Maximum capacity */}
+      <div className="grid grid-cols-[24rem_1fr_1.2fr] items-center gap-6 py-3 border-b border-gray-200 last:border-none">
+        <label htmlFor="maxCapacity" className="font-medium">
+          Maximum capacity
+        </label>
+        <Input type="number" id="maxCapacity" register= {register} />
+      </div>
 
-      <FormRow>
-        <Label htmlFor="regularPrice">Regular price</Label>
-        <Input type="number" id="regularPrice" />
-      </FormRow>
+      {/* Regular price */}
+      <div className="grid grid-cols-[24rem_1fr_1.2fr] items-center gap-6 py-3 border-b border-gray-200 last:border-none">
+        <label htmlFor="regularPrice" className="font-medium">
+          Regular price
+        </label>
+        <Input type="number" id="regularPrice" register= {register} />
+      </div>
 
-      <FormRow>
-        <Label htmlFor="discount">Discount</Label>
-        <Input type="number" id="discount" defaultValue={0} />
-      </FormRow>
+      {/* Discount */}
+      <div className="grid grid-cols-[24rem_1fr_1.2fr] items-center gap-6 py-3 border-b border-gray-200 last:border-none">
+        <label htmlFor="discount" className="font-medium">
+          Discount
+        </label>
+        <Input type="number" id="discount" defaultValue={0} register= {register} />
+      </div>
 
-      <FormRow>
-        <Label htmlFor="description">Description for website</Label>
-        <Textarea type="number" id="description" defaultValue="" />
-      </FormRow>
+      {/* Description */}
+      <div className="grid grid-cols-[24rem_1fr_1.2fr] items-center gap-6 py-3 border-b border-gray-200 last:border-none">
+        <label htmlFor="description" className="font-medium">
+          Description for website
+        </label>
+        <Textarea id="description" defaultValue="" register={register} />
+      </div>
 
-      <FormRow>
-        <Label htmlFor="image">Cabin photo</Label>
+      {/* File upload */}
+      <div className="grid grid-cols-[24rem_1fr_1.2fr] items-center gap-6 py-3 border-b border-gray-200 last:border-none">
+        <label htmlFor="image" className="font-medium">
+          Cabin photo
+        </label>
         <FileInput id="image" accept="image/*" />
-      </FormRow>
+      </div>
 
-      <FormRow>
-        {/* type is an HTML attribute! */}
+      {/* Buttons row */}
+      <div className="flex justify-end gap-3 py-3">
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button>Edit cabin</Button>
-      </FormRow>
+        <Button>Add cabin</Button>
+      </div>
     </Form>
   );
 }

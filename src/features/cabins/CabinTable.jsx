@@ -3,7 +3,7 @@ import CabinRow from "./CabinRow";
 
 const CabinsTable = ({ cabins }) => {
   return (
-    <div className="overflow-x-auto rounded-lg relative">
+    <div className="overflow-x-auto rounded-lg relative border border-gray-200">
       <table className="min-w-full divide-y divide-gray-200">
         <CabinsTableHeader />
         <tbody className="bg-white divide-y divide-gray-200">

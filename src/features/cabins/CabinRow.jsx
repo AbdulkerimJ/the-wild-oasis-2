@@ -22,8 +22,8 @@ export const CabinRow = ({ cabin }) => {
   return (
     <tr className="hover:bg-gray-50 transition-colors duration-200">
       {/* Cabin Image */}
-      <td className="pl-4 py-3">
-        <div className="w-16 h-12 overflow-hidden rounded-lg shadow-sm">
+      <td className="pl-4">
+        <div className="w-16 h-12 overflow-hidden rounded-sm">
           <img
             src={image}
             alt={`Cabin ${id}`}
