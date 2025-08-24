@@ -4,11 +4,25 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createCabin } from "../../services/apiCabins";
+import toast from "react-hot-toast";
+
+
 
 function CreateCabinForm() {
-
-  const {register, handleSubmit} = useForm();
-  const onSubmit = data => console.log(data);
+  const { register, handleSubmit, reset } = useForm();
+  const queryClient = useQueryClient();
+  const { isPending: isCreating, mutate } = useMutation({
+    mutationFn: createCabin,
+    onSuccess: () => {
+      reset();
+      toast.success("Cabin created successfully");
+      queryClient.invalidateQueries({ queryKey: ["cabins"] });
+    },
+    onError: (err) => toast.error(err.message),
+  });
+  const onSubmit = (data) => mutate(data);
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       {/* Cabin name */}
@@ -16,7 +30,7 @@ function CreateCabinForm() {
         <label htmlFor="name" className="font-medium">
           Cabin name
         </label>
-        <Input type="text" id="name" register= {register} />
+        <Input type="text" id="name" register={register} />
       </div>
 
       {/* Maximum capacity */}
@@ -24,7 +38,7 @@ function CreateCabinForm() {
         <label htmlFor="maxCapacity" className="font-medium">
           Maximum capacity
         </label>
-        <Input type="number" id="maxCapacity" register= {register} />
+        <Input type="number" id="maxCapacity" register={register} />
       </div>
 
       {/* Regular price */}
@@ -32,7 +46,7 @@ function CreateCabinForm() {
         <label htmlFor="regularPrice" className="font-medium">
           Regular price
         </label>
-        <Input type="number" id="regularPrice" register= {register} />
+        <Input type="number" id="regularPrice" register={register} />
       </div>
 
       {/* Discount */}
@@ -40,7 +54,12 @@ function CreateCabinForm() {
         <label htmlFor="discount" className="font-medium">
           Discount
         </label>
-        <Input type="number" id="discount" defaultValue={0} register= {register} />
+        <Input
+          type="number"
+          id="discount"
+          defaultValue={0}
+          register={register}
+        />
       </div>
 
       {/* Description */}
@@ -64,7 +83,7 @@ function CreateCabinForm() {
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button>Add cabin</Button>
+        <Button disabled = {isCreating}> {isCreating ? "Adding..." : "Add cabin"}</Button>
       </div>
     </Form>
   );
