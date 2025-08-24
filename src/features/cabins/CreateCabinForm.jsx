@@ -3,15 +3,14 @@ import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
-import { useForm } from "react-hook-form";
+import { get, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
 
-
-
 function CreateCabinForm() {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, getValues, formState } = useForm();
+  const { errors } = formState;
   const queryClient = useQueryClient();
   const { isPending: isCreating, mutate } = useMutation({
     mutationFn: createCabin,
@@ -30,7 +29,14 @@ function CreateCabinForm() {
         <label htmlFor="name" className="font-medium">
           Cabin name
         </label>
-        <Input type="text" id="name" register={register} />
+        <Input
+          type="text"
+          id="name"
+          register={register}
+          rules={{ required: "This field is required." }}
+          error={errors?.name?.message}
+          disabled={isCreating}
+        />
       </div>
 
       {/* Maximum capacity */}
@@ -38,7 +44,14 @@ function CreateCabinForm() {
         <label htmlFor="maxCapacity" className="font-medium">
           Maximum capacity
         </label>
-        <Input type="number" id="maxCapacity" register={register} />
+        <Input
+          type="number"
+          id="maxCapacity"
+          register={register}
+          rules={{ required: "This field is required." }}
+          error={errors?.maxCapacity?.message}
+          disabled={isCreating}
+        />
       </div>
 
       {/* Regular price */}
@@ -46,7 +59,17 @@ function CreateCabinForm() {
         <label htmlFor="regularPrice" className="font-medium">
           Regular price
         </label>
-        <Input type="number" id="regularPrice" register={register} />
+        <Input
+          type="number"
+          id="regularPrice"
+          register={register}
+          rules={{
+            required: "This field is required.",
+            min: { value: 1, message: "Price must be at least 1" },
+          }}
+          error={errors?.regularPrice?.message}
+          disabled={isCreating}
+        />
       </div>
 
       {/* Discount */}
@@ -57,8 +80,17 @@ function CreateCabinForm() {
         <Input
           type="number"
           id="discount"
-          defaultValue={0}
+          defaultValue={1}
           register={register}
+          rules={{
+            required: "This field is required.",
+            min: { value: 1, message: "Discount must be at least 1" },
+            validate: (value) =>
+              value <= getValues("regularPrice") ||
+              "Discount must be less than or equal to regular price",
+          }}
+          error={errors?.discount?.message}
+          disabled= {isCreating}
         />
       </div>
 
@@ -67,7 +99,14 @@ function CreateCabinForm() {
         <label htmlFor="description" className="font-medium">
           Description for website
         </label>
-        <Textarea id="description" defaultValue="" register={register} />
+        <Textarea
+          id="description"
+          defaultValue=""
+          register={register}
+          rules={{ required: "This field is required." }}
+          error={errors?.description?.message}
+          disabled={isCreating}
+        />
       </div>
 
       {/* File upload */}
@@ -83,7 +122,10 @@ function CreateCabinForm() {
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button disabled = {isCreating}> {isCreating ? "Adding..." : "Add cabin"}</Button>
+        <Button disabled={isCreating}>
+          {" "}
+          {isCreating ? "Adding..." : "Add cabin"}
+        </Button>
       </div>
     </Form>
   );

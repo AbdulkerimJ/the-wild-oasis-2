@@ -14,7 +14,7 @@ const Input = ({ label, id, error, register, rules = {}, className = "", ...prop
           ${className}`}
       />
 
-      {error && <span className="text-xs text-red-600">{error.message}</span>}
+      {error && <span className="text-xs text-red-600">{error}</span>}
     </div>
   );
 };
