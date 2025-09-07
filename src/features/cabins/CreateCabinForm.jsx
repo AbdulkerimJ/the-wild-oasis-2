@@ -12,16 +12,21 @@ function CreateCabinForm() {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
   const { errors } = formState;
   const queryClient = useQueryClient();
+
   const { isPending: isCreating, mutate } = useMutation({
     mutationFn: createCabin,
     onSuccess: () => {
-      reset();
       toast.success("Cabin created successfully");
       queryClient.invalidateQueries({ queryKey: ["cabins"] });
+      reset();
     },
     onError: (err) => toast.error(err.message),
   });
-  const onSubmit = (data) => mutate(data);
+
+  const onSubmit = (data) => {
+    mutate({ ...data, image: data.image[0] });
+  };
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       {/* Cabin name */}
@@ -90,7 +95,7 @@ function CreateCabinForm() {
               "Discount must be less than or equal to regular price",
           }}
           error={errors?.discount?.message}
-          disabled= {isCreating}
+          disabled={isCreating}
         />
       </div>
 
@@ -114,13 +119,20 @@ function CreateCabinForm() {
         <label htmlFor="image" className="font-medium">
           Cabin photo
         </label>
-        <FileInput id="image" accept="image/*" />
+        <FileInput
+          id="image"
+          accept="image/*"
+          register={register}
+          rules={{ required: "This field is required." }}
+          error={errors?.image?.message}
+          disabled={isCreating}
+        />
       </div>
 
       {/* Buttons row */}
       <div className="flex justify-end gap-3 py-3">
         <Button variation="secondary" type="reset">
-          Cancel
+          Reset
         </Button>
         <Button disabled={isCreating}>
           {" "}

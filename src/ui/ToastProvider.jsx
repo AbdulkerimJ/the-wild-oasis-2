@@ -6,7 +6,7 @@ const ToastProvider = () => {
       position="top-center"
       toastOptions={{
         // Default options
-        duration: 2000,
+        duration: 3000,
         style: {
           borderRadius: "12px",
           padding: "16px 24px",

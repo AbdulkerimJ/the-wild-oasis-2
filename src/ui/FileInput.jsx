@@ -27,8 +27,7 @@ const FileInput = ({
           file:text-sm file:font-medium
           file:bg-indigo-600 file:text-white
           hover:file:bg-indigo-700
-          cursor-pointer
-          ${error ? "border border-red-500" : ""}
+          cursor-pointer 
           ${className}
         `}
       />

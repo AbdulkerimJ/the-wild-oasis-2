@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import CabinsTable from "../features/cabins/CabinTable";
 import { useQuery } from "@tanstack/react-query";
 import { getCabins } from "../services/apiCabins";

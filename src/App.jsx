@@ -14,13 +14,7 @@ import AppLayout from "./ui/AppLayout";
 import { QueryClientProvider } from "@tanstack/react-query";
 import ToastProvider from "./ui/ToastProvider";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 0
-    }
-  }
-});
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
