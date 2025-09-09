@@ -1,10 +1,29 @@
+import { HiPencil, HiSquare2Stack } from "react-icons/hi2";
+import { HiPencilSquare } from "react-icons/hi2";
+import { HiTrash } from "react-icons/hi2";
+
 import { formatCurrency } from "../../utils/helpers";
-import CreateCabinForm from "./CreateCabinForm";
 import { useDeleteCabin } from "./useDeleteCabin";
+import useCreateCabin from "./useCreateCabin";
 
 export const CabinRow = ({ cabin }) => {
-  const { id, maxCapacity, regularPrice, discount, image } = cabin;
+  const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
+  const { isCreating, createCabin } = useCreateCabin();
   const { isDeleting, deleteCabin } = useDeleteCabin();
+
+  const handleDublicate = () => {
+    const prefix = "Copy of ";
+
+    createCabin({
+      name: `${name.startsWith(prefix) ? name : prefix + name}`,
+      maxCapacity,
+      regularPrice,
+      discount,
+      image,
+    }, {onSuccess: (data) => {
+      console.log(data);
+    }});
+  };
 
   return (
     <>
@@ -14,14 +33,14 @@ export const CabinRow = ({ cabin }) => {
           <div className="w-16 h-12 overflow-hidden rounded-sm">
             <img
               src={image}
-              alt={`Cabin ${id}`}
+              alt={`Cabin ${name}`}
               className="w-full h-full object-cover object-center"
             />
           </div>
         </td>
 
         {/* Cabin Info */}
-        <td className="px-4 py-3 font-medium text-gray-700">{id}</td>
+        <td className="px-4 py-3 font-medium text-gray-700">{name}</td>
         <td className="px-4 py-3 text-gray-600">{maxCapacity} guests</td>
         <td className="px-4 py-3 font-semibold text-gray-800">
           {formatCurrency(regularPrice)}
@@ -39,16 +58,29 @@ export const CabinRow = ({ cabin }) => {
         {/* Actions */}
         <td className="px-4 py-3">
           <div className="inline-flex gap-2">
-            <button className="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition">
-              Edit
-            </button>
             <button
+              aria-label="Duplicate cabin"
+              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              onClick={handleDublicate}
+              disabled={isCreating}
+            >
+              <HiSquare2Stack className="w-5 h-5" />
+            </button>
+
+            <button
+              aria-label="Edit cabin"
+              className="p-2 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-600 hover:text-blue-800 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            >
+              <HiPencilSquare className="w-5 h-5" />
+            </button>
+
+            <button
+              aria-label="Delete cabin"
               onClick={() => deleteCabin(id)}
               disabled={isDeleting}
-              className={`px-3 py-1 text-sm font-medium rounded-lg border transition bg-red-50 text-red-600 border-red-200 hover:bg-red-100
-            `}
+              className="p-2 rounded-lg bg-red-100 hover:bg-red-200 text-red-600 hover:text-red-800 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              Delete
+              <HiTrash className="w-5 h-5" />
             </button>
           </div>
         </td>
