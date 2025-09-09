@@ -1,14 +1,10 @@
 import CabinsTable from "../features/cabins/CabinTable";
-import { useQuery } from "@tanstack/react-query";
-import { getCabins } from "../services/apiCabins";
+import {useCabins} from "../features/cabins/useCabins";
 import Loader from "../ui/Loader";
 import CreateCabinForm from "../features/cabins/CreateCabinForm";
 
 const Cabins = () => {
-  const { data: cabins, isLoading } = useQuery({
-    queryKey: ["cabins"],
-    queryFn: getCabins,
-  });
+ const {isLoading, cabins} = useCabins();
   
   return (
     <>
