@@ -12,7 +12,6 @@ export const getCabins = async () => {
 };
 
 export const createCabin = async (cabinData) => {
-  console.log(cabinData);
   // 1. Prepare image data
   const imageName = `${Date.now()}-${cabinData.image?.name}`.replaceAll("/", "");
   const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;

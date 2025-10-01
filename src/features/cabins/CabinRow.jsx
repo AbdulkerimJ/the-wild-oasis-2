@@ -20,9 +20,7 @@ export const CabinRow = ({ cabin }) => {
       regularPrice,
       discount,
       image,
-    }, {onSuccess: (data) => {
-      console.log(data);
-    }});
+    });
   };
 
   return (

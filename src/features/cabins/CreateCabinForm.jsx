@@ -11,7 +11,7 @@ function CreateCabinForm() {
   const { errors } = formState;
   const {isCreating, createCabin} = useCreateCabin();
   const onSubmit = (data) => {
-    createCabin({ ...data, image: data.image[0] }, {
+    createCabin({ ...data, discount: data.discount ? Number(data.discount) : 0 , image: data.image[0] }, {
       onSuccess: () => reset(),
     });
   };
@@ -74,13 +74,10 @@ function CreateCabinForm() {
         <Input
           type="number"
           id="discount"
-          defaultValue={1}
           register={register}
           rules={{
-            required: "This field is required.",
-            min: { value: 1, message: "Discount must be at least 1" },
             validate: (value) =>
-              value <= getValues("regularPrice") ||
+              value*1 <= getValues("regularPrice") ||
               "Discount must be less than or equal to regular price",
           }}
           error={errors?.discount?.message}
