@@ -10,19 +10,13 @@ const Filter = ({ filterField, options }) => {
     setSearchParams(searchParams);
   };
   return (
-    <div className="
-    flex gap-2 p-2
-    bg-white/90 backdrop-blur-sm
-    rounded-lg
-    shadow-md
-    border border-gray-200
-    transition-all duration-200 ease-in-out
-  ">
+    <div >
   {options.map((option) => (
     <Button
       variant={option.value === activeFilter ? "active" : "secondary"}
       key={option.value}
       onClick={() => handleClick(option.value)}
+      disabled = {option.value === activeFilter}
     >
       {option.label}
     </Button>
