@@ -6,7 +6,7 @@ import CabinTableOperations from "../features/cabins/CabinTableOperations";
 import Empty from "../ui/Empty";
 
 const Cabins = () => {
-  const { isLoading, cabins, error, isError } = useCabins();
+  const { isLoading, cabins, isError } = useCabins();
 
   if (isLoading) return <Loader />;
   if (isError)

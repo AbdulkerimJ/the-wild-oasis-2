@@ -2,7 +2,7 @@ import Filter from "../../ui/Filter";
 import SortBy from "../../ui/SortBy";
 const CabinTableOperations = () => {
   return (
-    <div className="flex gap-3 justify-end m-5">
+    <div className="flex gap-3 justify-end">
       <Filter
         filterField="discount"
         options={[

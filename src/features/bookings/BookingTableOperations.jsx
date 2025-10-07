@@ -3,7 +3,7 @@ import Filter from "../../ui/Filter";
 
 function BookingTableOperations() {
   return (
-    <div>
+    <div className="flex justify-end">
       <Filter
         filterField="status"
         options={[

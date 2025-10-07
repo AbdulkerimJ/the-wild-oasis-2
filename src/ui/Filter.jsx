@@ -10,7 +10,7 @@ const Filter = ({ filterField, options }) => {
     setSearchParams(searchParams);
   };
   return (
-    <div >
+    <div>
   {options.map((option) => (
     <Button
       variant={option.value === activeFilter ? "active" : "secondary"}
