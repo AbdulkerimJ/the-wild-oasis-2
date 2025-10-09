@@ -1,57 +1,60 @@
-import styled from "styled-components";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
+import { useSearchParams } from "react-router-dom";
+import { PAGE_SIZE } from "../utils/constants";
 
-const StyledPagination = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
 
-const P = styled.p`
-  font-size: 1.4rem;
-  margin-left: 0.8rem;
 
-  & span {
-    font-weight: 600;
-  }
-`;
+const Pagination = ({ count }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = !searchParams.get("page")
+    ? 1
+    : Number(searchParams.get("page"));
 
-const Buttons = styled.div`
-  display: flex;
-  gap: 0.6rem;
-`;
+  const totalPages = Math.ceil(count / PAGE_SIZE);
 
-const PaginationButton = styled.button`
-  background-color: ${(props) =>
-    props.active ? " var(--color-brand-600)" : "var(--color-grey-50)"};
-  color: ${(props) => (props.active ? " var(--color-brand-50)" : "inherit")};
-  border: none;
-  border-radius: var(--border-radius-sm);
-  font-weight: 500;
-  font-size: 1.4rem;
+  const nextPage = () => {
+    const nextPage = currentPage === totalPages ? currentPage : currentPage + 1;
+    searchParams.set("page", nextPage);
+    setSearchParams(searchParams);
+  };
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.6rem 1.2rem;
-  transition: all 0.3s;
+  const prevPage = () => {
+    const prevPage = currentPage === 1 ? currentPage : currentPage - 1;
+    searchParams.set("page", prevPage);
+    setSearchParams(searchParams);
+  };
 
-  &:has(span:last-child) {
-    padding-left: 0.4rem;
-  }
+  if( totalPages <= 1) return null;
+  return (
+    <div className="flex justify-around text-center text-sm text-gray-600 rounded-md font-sans">
+      Showing {(currentPage - 1) * PAGE_SIZE + 1} to {currentPage === totalPages ? count : currentPage * PAGE_SIZE} of {count} results
+      <div className="flex items-center justify-center gap-4">
+        <button
+          onClick={prevPage}
+          disabled={currentPage === 1}
+          className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm 
+          hover:bg-gray-50 hover:text-gray-900 
+          active:scale-95 focus:ring-2 focus:ring-blue-300 
+          disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-150 cursor-pointer"
+        >
+          <HiChevronLeft className="w-4 h-4" />
+          <span>Previous</span>
+        </button>
 
-  &:has(span:first-child) {
-    padding-right: 0.4rem;
-  }
+        <button
+          onClick={nextPage}
+          disabled={currentPage === totalPages}
+          className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm 
+          hover:bg-gray-50 hover:text-gray-900 
+          active:scale-95 focus:ring-2 focus:ring-blue-300 
+          disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-150 cursor-pointer"
+        >
+          <span>Next</span>
+          <HiChevronRight className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  );
+};
 
-  & svg {
-    height: 1.8rem;
-    width: 1.8rem;
-  }
-
-  &:hover:not(:disabled) {
-    background-color: var(--color-brand-600);
-    color: var(--color-brand-50);
-  }
-`;
+export default Pagination;
