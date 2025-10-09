@@ -6,20 +6,30 @@ import Textarea from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
 import useCreateCabin from "./useCreateCabin";
 
-function CreateCabinForm() {
+function CreateCabinForm({ onCloseModal }) {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
   const { errors } = formState;
-  const {isCreating, createCabin} = useCreateCabin();
+  const { isCreating, createCabin } = useCreateCabin();
   const onSubmit = (data) => {
-    createCabin({ ...data, discount: data.discount ? Number(data.discount) : 0 , image: data.image[0] }, {
-      onSuccess: () => reset(),
-    });
+    createCabin(
+      {
+        ...data,
+        discount: data.discount ? Number(data.discount) : 0,
+        image: data.image[0],
+      },
+      {
+        onSuccess: () => {
+          reset();
+          onCloseModal?.();
+        },
+      }
+    );
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       {/* Cabin name */}
-      <div className="grid grid-cols-[24rem_1fr_1.2fr] items-center gap-6 py-3 first:pt-0 last:pb-0 border-b border-gray-200 last:border-none">
+      <div className="grid grid-cols-[24rem_1fr_1.2fr] items-center gap-6  first:pt-0 last:pb-0 border-b border-gray-200 last:border-none">
         <label htmlFor="name" className="font-medium">
           Cabin name
         </label>
@@ -77,7 +87,7 @@ function CreateCabinForm() {
           register={register}
           rules={{
             validate: (value) =>
-              value*1 <= getValues("regularPrice") ||
+              value * 1 <= getValues("regularPrice") ||
               "Discount must be less than or equal to regular price",
           }}
           error={errors?.discount?.message}
@@ -116,7 +126,7 @@ function CreateCabinForm() {
       </div>
 
       {/* Buttons row */}
-      <div className="flex justify-end gap-3 py-3">
+      <div className="flex justify-end gap-3">
         <Button variation="secondary" type="reset">
           Reset
         </Button>

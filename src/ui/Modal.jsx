@@ -1,50 +1,30 @@
-import styled from "styled-components";
+import React from "react";
+import { HiXMark } from "react-icons/hi2";
 
-const StyledModal = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--color-grey-0);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
-  padding: 3.2rem 4rem;
-  transition: all 0.5s;
-`;
+const Modal = ({ onClose, children }) => {
+  return (
+    <div
+      className="fixed inset-0 bg-black/10 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-auto "
+      onClick={onClose}
+    >
+      <div
+        className="bg-white p-8 rounded-2xl shadow-2xl w-[90vw] max-w-6xl max-h-[85vh] overflow-auto relative transition-all duration-200"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Content */}
+        {children}
 
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: var(--backdrop-color);
-  backdrop-filter: blur(4px);
-  z-index: 1000;
-  transition: all 0.5s;
-`;
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-3xl leading-none bg-transparent border-none cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-full p-1"
+          aria-label="Close modal"
+        >
+          <HiXMark />
+        </button>
+      </div>
+    </div>
+  );
+};
 
-const Button = styled.button`
-  background: none;
-  border: none;
-  padding: 0.4rem;
-  border-radius: var(--border-radius-sm);
-  transform: translateX(0.8rem);
-  transition: all 0.2s;
-  position: absolute;
-  top: 1.2rem;
-  right: 1.9rem;
-
-  &:hover {
-    background-color: var(--color-grey-100);
-  }
-
-  & svg {
-    width: 2.4rem;
-    height: 2.4rem;
-    /* Sometimes we need both */
-    /* fill: var(--color-grey-500);
-    stroke: var(--color-grey-500); */
-    color: var(--color-grey-500);
-  }
-`;
+export default Modal;

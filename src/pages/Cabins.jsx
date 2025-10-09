@@ -4,6 +4,8 @@ import Loader from "../ui/Loader";
 import CreateCabinForm from "../features/cabins/CreateCabinForm";
 import CabinTableOperations from "../features/cabins/CabinTableOperations";
 import Empty from "../ui/Empty";
+import Modal from "../ui/Modal";
+import AddCabins from "../features/cabins/AddCabins";
 
 const Cabins = () => {
   const { isLoading, cabins, isError } = useCabins();
@@ -19,7 +21,8 @@ const Cabins = () => {
       <h1 className="text-2xl font-semibold mb-8">All cabins</h1>
       <CabinTableOperations />
       <CabinsTable cabins={cabins} />
-      <CreateCabinForm />
+      <AddCabins />
+   
     </>
   );
 };

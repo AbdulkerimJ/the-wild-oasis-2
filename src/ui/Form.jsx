@@ -1,11 +1,7 @@
 const Form = ({ type = "default", children, ...props }) => {
   return (
     <form
-      className={`
-        overflow-hidden text-sm
-        ${type !== "modal" ? "p-6 md:p-10 bg-white border border-gray-200 rounded-md" : ""}
-        ${type === "modal" ? "w-[80rem]" : ""}
-      `}
+      className="text-sm bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden p-4 m-2"
       {...props}
     >
       {children}
