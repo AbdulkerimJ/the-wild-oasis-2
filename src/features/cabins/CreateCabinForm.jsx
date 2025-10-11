@@ -25,6 +25,7 @@ function CreateCabinForm({ onCloseModal }) {
       }
     );
   };
+  
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

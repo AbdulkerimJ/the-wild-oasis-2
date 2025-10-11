@@ -1,86 +1,95 @@
-import styled from "styled-components";
-import { format, isToday } from "date-fns";
+import React, { use } from "react";
+import { useNavigate } from "react-router-dom";
 
-import Tag from "../../ui/Tag";
-import Table from "../../ui/Table";
+const formatDate = (dateString) => {
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+};
 
-import { formatCurrency } from "../../utils/helpers";
-import { formatDistanceFromNow } from "../../utils/helpers";
-
-const Cabin = styled.div`
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--color-grey-600);
-  font-family: "Sono";
-`;
-
-const Stacked = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-
-  & span:first-child {
-    font-weight: 500;
+const getStatusClasses = (status) => {
+  const lowerStatus = status.toLowerCase();
+  switch (lowerStatus) {
+    case "unconfirmed":
+      return "bg-blue-100 text-blue-800";
+    case "confirmed":
+      return "bg-green-100 text-green-800";
+    case "pending":
+      return "bg-yellow-100 text-yellow-800";
+    case "cancelled":
+      return "bg-red-100 text-red-800";
+    default:
+      return "bg-gray-100 text-gray-800";
   }
+};
 
-  & span:last-child {
-    color: var(--color-grey-500);
-    font-size: 1.2rem;
-  }
-`;
-
-const Amount = styled.div`
-  font-family: "Sono";
-  font-weight: 500;
-`;
-
-function BookingRow({
-  booking: {
-    id: bookingId,
-    created_at,
+const BookingRow = ({ booking }) => {
+  const navigate = useNavigate();
+  const {
+    id,
+    guests,
+    cabins,
     startDate,
     endDate,
     numNights,
     numGuests,
     totalPrice,
     status,
-    guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
-  },
-}) {
-  const statusToTagName = {
-    unconfirmed: "blue",
-    "checked-in": "green",
-    "checked-out": "silver",
-  };
+    hasBreakfast,
+    isPaid,
+  } = booking;
 
   return (
-    <Table.Row>
-      <Cabin>{cabinName}</Cabin>
+    <tr className="hover:bg-gray-50 transition-colors duration-200 cursor-pointer" onClick={() => navigate(`/bookings/${id}`)} >
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        {cabins.name}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+        {guests.fullName}
+      </td>
 
-      <Stacked>
-        <span>{guestName}</span>
-        <span>{email}</span>
-      </Stacked>
-
-      <Stacked>
-        <span>
-          {isToday(new Date(startDate))
-            ? "Today"
-            : formatDistanceFromNow(startDate)}{" "}
-          &rarr; {numNights} night stay
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        {formatDate(startDate)}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        {formatDate(endDate)}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        {numNights}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        {numGuests}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+        ${totalPrice}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap">
+        <span
+          className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusClasses(
+            status
+          )}`}
+        >
+          {status.toUpperCase()}
         </span>
-        <span>
-          {format(new Date(startDate), "MMM dd yyyy")} &mdash;{" "}
-          {format(new Date(endDate), "MMM dd yyyy")}
-        </span>
-      </Stacked>
-
-      <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
-
-      <Amount>{formatCurrency(totalPrice)}</Amount>
-    </Table.Row>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm">
+        {hasBreakfast ? (
+          <span className="text-green-600">Yes</span>
+        ) : (
+          <span className="text-gray-400">No</span>
+        )}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm">
+        {isPaid ? (
+          <span className="text-green-600">Yes</span>
+        ) : (
+          <span className="text-red-600">No</span>
+        )}
+      </td>
+    </tr>
   );
-}
+};
 
 export default BookingRow;
