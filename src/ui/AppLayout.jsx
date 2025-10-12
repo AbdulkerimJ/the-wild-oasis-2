@@ -5,7 +5,7 @@ import Loader from "./Loader";
 
 const AppLayout = () => {
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 select-none">
       <Sidebar />
 
       <div className="flex-1 flex flex-col">

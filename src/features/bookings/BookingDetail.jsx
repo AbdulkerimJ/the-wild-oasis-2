@@ -14,12 +14,15 @@ import {
   MdFlag,
   MdTimer,
 } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 function BookingDetail() {
-  const { booking, isLoading } = useBooking();
+  const { booking, isFetching } = useBooking();
   const moveBack = useMoveBack();
+  const navigate = useNavigate();
 
-  if (isLoading) return <Loader />;
+  if (isFetching) return <Loader />;
+  
   if (!booking)
     return (
       <div className="flex flex-col items-center justify-center min-h-screen text-gray-500">
@@ -27,9 +30,20 @@ function BookingDetail() {
       </div>
     );
 
-  const b = booking;
-  const cabin = b.cabins;
-  const guest = b.guests;
+  const {
+    id,
+    created_at,
+    totalPrice,
+    numNights,
+    numGuests,
+    startDate,
+    endDate,
+    hasBreakfast,
+    status,
+    isPaid,
+    cabins: cabin,
+    guests: guest,
+  } = booking;
 
   const formatDate = (date) =>
     new Date(date).toLocaleDateString("en-US", {
@@ -39,28 +53,31 @@ function BookingDetail() {
     });
 
   const daysAgo = Math.floor(
-    (new Date() - new Date(b.created_at)) / (1000 * 60 * 60 * 24)
+    (new Date() - new Date(created_at)) / (1000 * 60 * 60 * 24)
   );
 
   return (
     <div className="min-h-screen bg-gradient-to-br py-14 px-6 text-gray-800">
       <div className="max-w-6xl mx-auto space-y-12">
-
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white border border-indigo-100 shadow-sm rounded-3xl px-8 py-6">
           <div>
             <h1 className="text-xl font-semibold tracking-tight text-gray-900">
-              Booking #{b.id}
+              Booking #{id}
             </h1>
             <p className="text-gray-500 text-sm mt-1">
-              Created on {formatDate(b.created_at)}
+              Created on {formatDate(created_at)}
             </p>
           </div>
 
           <div className="flex gap-8 text-center mt-4 md:mt-0">
-            <Stat title="Total" value={`$${b.totalPrice}`} icon={<MdAttachMoney />} />
-            <Stat title="Nights" value={b.numNights} icon={<MdDateRange />} />
-            <Stat title="Guests" value={b.numGuests} icon={<MdPerson />} />
+            <Stat
+              title="Total"
+              value={`$${totalPrice}`}
+              icon={<MdAttachMoney />}
+            />
+            <Stat title="Nights" value={numNights} icon={<MdDateRange />} />
+            <Stat title="Guests" value={numGuests} icon={<MdPerson />} />
           </div>
 
           <button
@@ -77,9 +94,12 @@ function BookingDetail() {
             <MdTimer className="text-2xl" />
           </div>
           <div>
-            <h2 className="text-base font-medium text-gray-800">Booking Timeline</h2>
+            <h2 className="text-base font-medium text-gray-800">
+              Booking Timeline
+            </h2>
             <p className="text-gray-600">
-              Booked on <span className="font-medium">{formatDate(b.created_at)}</span> —{" "}
+              Booked on{" "}
+              <span className="font-medium">{formatDate(created_at)}</span> —{" "}
               <span className="text-indigo-600 font-medium">
                 {daysAgo === 0
                   ? "today"
@@ -97,7 +117,11 @@ function BookingDetail() {
           <div className="bg-white rounded-3xl border border-indigo-100 shadow-sm p-8 hover:shadow-md transition-all">
             <SectionHeader title="Guest Information" icon={<MdPerson />} />
             <div className="space-y-5 mt-6">
-              <Info label="Full Name" value={guest?.fullName} icon={<MdPerson />} />
+              <Info
+                label="Full Name"
+                value={guest?.fullName}
+                icon={<MdPerson />}
+              />
               <Info label="Email" value={guest?.email} icon={<MdEmail />} />
               <Info
                 label="Nationality"
@@ -129,31 +153,39 @@ function BookingDetail() {
             <SectionHeader title="Booking Details" icon={<MdApartment />} />
             <div className="space-y-5">
               <Info label="Cabin" value={cabin?.name} icon={<MdApartment />} />
-              <Info label="Check-in" value={formatDate(b.startDate)} icon={<MdDateRange />} />
-              <Info label="Check-out" value={formatDate(b.endDate)} icon={<MdDateRange />} />
+              <Info
+                label="Check-in"
+                value={formatDate(startDate)}
+                icon={<MdDateRange />}
+              />
+              <Info
+                label="Check-out"
+                value={formatDate(endDate)}
+                icon={<MdDateRange />}
+              />
               <Info
                 label="Breakfast"
-                value={b.hasBreakfast ? "Yes" : "No"}
+                value={hasBreakfast ? "Yes" : "No"}
                 icon={<MdLocalDining />}
-                color={b.hasBreakfast ? "text-green-600" : "text-gray-400"}
+                color={hasBreakfast ? "text-green-600" : "text-gray-400"}
               />
               <Info
                 label="Status"
-                value={b.status}
+                value={status}
                 icon={<MdCheckCircle />}
                 color={
-                  b.status === "unconfirmed"
+                  status === "unconfirmed"
                     ? "text-orange-600"
-                    : b.status === "checked-in"
+                    : status === "checked-in"
                     ? "text-green-600"
                     : "text-gray-500"
                 }
               />
               <Info
                 label="Payment"
-                value={b.isPaid ? "Paid" : "Pending"}
+                value={isPaid ? "Paid" : "Pending"}
                 icon={<MdAttachMoney />}
-                color={b.isPaid ? "text-green-600" : "text-red-500"}
+                color={isPaid ? "text-green-600" : "text-red-500"}
               />
             </div>
           </div>
@@ -161,9 +193,18 @@ function BookingDetail() {
 
         {/* Footer */}
         <div className="flex justify-end">
+          {status === "unconfirmed" && (
+            <button
+              className="flex items-center gap-2 px-5 py-2 bg-green-500 text-white rounded-full shadow-md hover:bg-green-600 hover:shadow-lg transition-all duration-300 cursor-pointer"
+              onClick={() => navigate(`/checkin/${id}`)}
+            >
+              Check In
+            </button>
+          )}
+
           <button
             onClick={moveBack}
-            className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl hover:opacity-90 transition-all shadow-md flex items-center gap-2 font-medium active:scale-95"
+            className="flex items-center gap-2 px-5 py-2 bg-gray-200 text-gray-800 rounded-full shadow-sm hover:bg-gray-300 transition-all duration-300 cursor-pointer"
           >
             <MdArrowBack /> Go Back
           </button>
@@ -176,7 +217,9 @@ function BookingDetail() {
 function Stat({ title, value, icon }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="p-3 bg-indigo-100 rounded-2xl text-indigo-600 mb-2">{icon}</div>
+      <div className="p-3 bg-indigo-100 rounded-2xl text-indigo-600 mb-2">
+        {icon}
+      </div>
       <span className="text-xs text-gray-500">{title}</span>
       <span className="font-medium text-base">{value}</span>
     </div>

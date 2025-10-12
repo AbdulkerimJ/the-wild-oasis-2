@@ -1,43 +1,30 @@
-import styled from "styled-components";
+import React from "react";
 
-const StyledCheckbox = styled.div`
-  display: flex;
-  gap: 1.6rem;
-
-  & input[type="checkbox"] {
-    height: 2.4rem;
-    width: 2.4rem;
-    outline-offset: 2px;
-    transform-origin: 0;
-    accent-color: var(--color-brand-600);
-  }
-
-  & input[type="checkbox"]:disabled {
-    accent-color: var(--color-brand-600);
-  }
-
-  & label {
-    flex: 1;
-
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-`;
-
-function Checkbox({ checked, onChange, disabled = false, id, children }) {
+const Checkbox = ({
+  id,
+  label,
+  checked,
+  onChange,
+  disabled = false,
+  className = "",
+}) => {
   return (
-    <StyledCheckbox>
+    <div className={`flex items-center gap-2 ${className}`}>
       <input
         type="checkbox"
         id={id}
         checked={checked}
         onChange={onChange}
         disabled={disabled}
+        className="w-5 h-5 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
       />
-      <label htmlFor={!disabled ? id : ""}>{children}</label>
-    </StyledCheckbox>
+      {label && (
+        <label htmlFor={id} className={`text-gray-700 select-none`}>
+          {label}
+        </label>
+      )}
+    </div>
   );
-}
+};
 
 export default Checkbox;
