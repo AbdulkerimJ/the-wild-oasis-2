@@ -5,12 +5,12 @@ import { useParams } from "react-router-dom";
 
 export const useBooking = () => {
   const {bookingId} = useParams();
-   const {data: booking, error, isError, isFetching } = useQuery({
+   const {data: booking, error, isError, isFetching: isCheckingBooking } = useQuery({
     queryKey: ["booking"],
     queryFn: () => getBooking(bookingId),
     retry: false,
   });
-  return {booking, error, isError, isFetching };
+  return {booking, error, isError, isCheckingBooking };
 };
 
 

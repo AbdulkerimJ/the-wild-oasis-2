@@ -17,11 +17,11 @@ import {
 import { useNavigate } from "react-router-dom";
 
 function BookingDetail() {
-  const { booking, isFetching } = useBooking();
+  const { booking, isCheckingBooking } = useBooking();
   const moveBack = useMoveBack();
   const navigate = useNavigate();
 
-  if (isFetching) return <Loader />;
+  if (isCheckingBooking) return <Loader />;
   
   if (!booking)
     return (
