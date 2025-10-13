@@ -16,10 +16,12 @@ import {
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useCheckout } from "../check-in-out/useCheckout";
+import { useDeleteBooking } from "./useDeleteBooking";
 
 function BookingDetail() {
   const { booking, isCheckingBooking } = useBooking();
   const { checkout, isCheckingOut } = useCheckout();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
   const moveBack = useMoveBack();
   const navigate = useNavigate();
 
@@ -49,7 +51,11 @@ function BookingDetail() {
 
   const handleCheckout = () => {
     checkout({ bookingId: id });
-  }
+  };
+  const handleDelete = () => {
+    deleteBooking(id);
+    navigate("/bookings");
+  };
   const formatDate = (date) =>
     new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
@@ -218,10 +224,19 @@ function BookingDetail() {
               Check In
             </button>
           )}
+          {status !== "checked-in" && (
+            <button
+              className="flex items-center gap-2 px-5 py-2 bg-red-600 text-white rounded-full shadow-md hover:bg-red-700 hover:shadow-lg transition-all duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+              onClick={handleDelete}
+              disabled={isDeleting}
+            >
+              Delete Booking
+            </button>
+          )}
 
           {status === "checked-in" && (
             <button
-              className="flex items-center gap-2 px-5 py-2 bg-red-500 text-white rounded-full shadow-md hover:bg-red-600 hover:shadow-lg transition-all duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex items-center gap-2 px-5 py-2 bg-green-500 text-white rounded-full shadow-md hover:bg-green-600 hover:shadow-lg transition-all duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               disabled={isCheckingOut}
               onClick={handleCheckout}
             >
