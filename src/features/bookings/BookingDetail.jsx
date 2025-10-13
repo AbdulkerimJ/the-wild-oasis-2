@@ -15,14 +15,16 @@ import {
   MdTimer,
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useCheckout } from "../check-in-out/useCheckout";
 
 function BookingDetail() {
   const { booking, isCheckingBooking } = useBooking();
+  const { checkout, isCheckingOut } = useCheckout();
   const moveBack = useMoveBack();
   const navigate = useNavigate();
 
   if (isCheckingBooking) return <Loader />;
-  
+
   if (!booking)
     return (
       <div className="flex flex-col items-center justify-center min-h-screen text-gray-500">
@@ -45,6 +47,9 @@ function BookingDetail() {
     guests: guest,
   } = booking;
 
+  const handleCheckout = () => {
+    checkout({ bookingId: id });
+  }
   const formatDate = (date) =>
     new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
@@ -56,14 +61,38 @@ function BookingDetail() {
     (new Date() - new Date(created_at)) / (1000 * 60 * 60 * 24)
   );
 
+  const getStatusStyle = (status) => {
+    switch (status) {
+      case "checked-in":
+        return "bg-green-100 text-green-700 border-green-300";
+      case "checked-out":
+        return "bg-gray-100 text-gray-700 border-gray-300";
+      case "unconfirmed":
+        return "bg-yellow-100 text-yellow-700 border-yellow-300";
+      default:
+        return "bg-gray-100 text-gray-600 border-gray-300";
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br py-14 px-6 text-gray-800">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white border border-indigo-100 shadow-sm rounded-3xl px-8 py-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white border border-indigo-100 shadow-sm rounded-3xl px-8 py-6 relative">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight text-gray-900">
+            <h1 className="text-xl font-semibold tracking-tight text-gray-900 flex items-center gap-4">
               Booking #{id}
+              <span
+                className={`text-sm font-semibold px-3 py-1 rounded-full border ${getStatusStyle(
+                  status
+                )}`}
+              >
+                {status === "checked-in"
+                  ? "Checked In"
+                  : status === "checked-out"
+                  ? "Checked Out"
+                  : "Unconfirmed"}
+              </span>
             </h1>
             <p className="text-gray-500 text-sm mt-1">
               Created on {formatDate(created_at)}
@@ -170,18 +199,6 @@ function BookingDetail() {
                 color={hasBreakfast ? "text-green-600" : "text-gray-400"}
               />
               <Info
-                label="Status"
-                value={status}
-                icon={<MdCheckCircle />}
-                color={
-                  status === "unconfirmed"
-                    ? "text-orange-600"
-                    : status === "checked-in"
-                    ? "text-green-600"
-                    : "text-gray-500"
-                }
-              />
-              <Info
                 label="Payment"
                 value={isPaid ? "Paid" : "Pending"}
                 icon={<MdAttachMoney />}
@@ -192,13 +209,23 @@ function BookingDetail() {
         </div>
 
         {/* Footer */}
-        <div className="flex justify-end">
+        <div className="flex justify-end gap-3">
           {status === "unconfirmed" && (
             <button
               className="flex items-center gap-2 px-5 py-2 bg-green-500 text-white rounded-full shadow-md hover:bg-green-600 hover:shadow-lg transition-all duration-300 cursor-pointer"
               onClick={() => navigate(`/checkin/${id}`)}
             >
               Check In
+            </button>
+          )}
+
+          {status === "checked-in" && (
+            <button
+              className="flex items-center gap-2 px-5 py-2 bg-red-500 text-white rounded-full shadow-md hover:bg-red-600 hover:shadow-lg transition-all duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={isCheckingOut}
+              onClick={handleCheckout}
+            >
+              Check Out
             </button>
           )}
 
