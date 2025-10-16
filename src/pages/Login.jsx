@@ -1,8 +1,12 @@
+import LoginForm from "../ui/LoginForm";
+import Logo from "../ui/Logo";
+
 function Login() {
   return (
-    <main className="min-h-screen grid content-center justify-center gap-8 bg-gray-50 [grid-template-columns:48rem]">
-      Login
-    </main>
+    <div className="flex flex-col gap-4 bg-gray-50">
+        <Logo />
+        <LoginForm />
+    </div>
   );
 }
 
