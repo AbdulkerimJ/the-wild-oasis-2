@@ -1,18 +1,12 @@
-import { useEffect } from "react";
+
+import { Navigate } from "react-router-dom";
 import useUser from "../features/authentication/useUser";
 import Loader from "./Loader";
-import { useNavigate } from "react-router-dom";
 const ProtectedRoute = ({ children }) => {
-  const {isPending, isAuthenticated } = useUser();
-  const navigate = useNavigate();
+  const { isLoading, isAuthenticated } = useUser();
 
-  useEffect(() => {
-    if (!isPending && !isAuthenticated) {
-      navigate("/login");
-    }
-  }, [isPending, isAuthenticated, navigate]);
-  
-  if (isPending) return <Loader />;
+  if (isLoading) return <Loader />;
+  if(!isAuthenticated) return <Navigate to = "/login" replace />
   return children;
 };
 

@@ -128,7 +128,7 @@ function CreateCabinForm({ onCloseModal }) {
 
       {/* Buttons row */}
       <div className="flex justify-end gap-3">
-        <Button variation="secondary" type="reset">
+        <Button variation="secondary" type="reset" disabled={isCreating}>
           Reset
         </Button>
         <Button disabled={isCreating}>

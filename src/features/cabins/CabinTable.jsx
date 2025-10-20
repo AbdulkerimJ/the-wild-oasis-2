@@ -4,7 +4,7 @@ import { formatCurrency } from "../../utils/helpers";
 import { useDeleteCabin } from "./useDeleteCabin";
 import useCreateCabin from "./useCreateCabin";
 
-const CabinTable = ({ cabins }) => {
+const CabinTable = ({ cabins = [] }) => {
   const [searchParams] = useSearchParams();
   const { isCreating, createCabin } = useCreateCabin();
   const { isDeleting, deleteCabin } = useDeleteCabin();

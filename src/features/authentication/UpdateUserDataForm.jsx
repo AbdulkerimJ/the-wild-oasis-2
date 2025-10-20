@@ -3,13 +3,11 @@ import { useState } from "react";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Form from "../../ui/Form";
-import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 
-import { useUser } from "./useUser";
+import useUser from "./useUser";
 
 function UpdateUserDataForm() {
-  // We don't need the loading state, and can immediately use the user data, because we know that it has already been loaded at this point
   const {
     user: {
       email,
@@ -22,34 +20,43 @@ function UpdateUserDataForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    // Handle update logic here
   }
 
   return (
     <Form onSubmit={handleSubmit}>
-      <FormRow label="Email address">
-        <Input value={email} disabled />
-      </FormRow>
-      <FormRow label="Full name">
-        <Input
-          type="text"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-          id="fullName"
-        />
-      </FormRow>
-      <FormRow label="Avatar image">
-        <FileInput
-          id="avatar"
-          accept="image/*"
-          onChange={(e) => setAvatar(e.target.files[0])}
-        />
-      </FormRow>
-      <FormRow>
-        <Button type="reset" variation="secondary">
-          Cancel
-        </Button>
-        <Button>Update account</Button>
-      </FormRow>
+      {/* Email */}
+
+      <Input label="Email Address" value={email} disabled />
+
+      {/* Full Name */}
+
+      <Input
+        label="Full Name"
+        type="text"
+        value={fullName}
+        onChange={(e) => setFullName(e.target.value)}
+        id="fullName"
+      />
+
+      {/* Avatar */}
+
+      <FileInput
+        label="Profile Picture"
+        id="avatar"
+        accept="image/*"
+        onChange={(e) => setAvatar(e.target.files[0])}
+        className="bg-transparent border-0 shadow-none"
+      />
+
+      {/* Buttons */}
+      <div className="flex justify-end gap-2 mt-4">
+  <Button type="reset" className="bg-gray-400 hover:bg-gray-500">
+    Cancel
+  </Button>
+  <Button type="submit">Update Account</Button>
+</div>
+
     </Form>
   );
 }

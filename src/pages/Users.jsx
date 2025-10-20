@@ -1,6 +1,13 @@
+import SignupForm from "../features/authentication/SignupForm";
+import Logo from "../ui/Logo";
 
 function NewUsers() {
-  return <h1>Create a new user</h1>;
+  return (
+    <>
+      <Logo />
+      <SignupForm />
+    </>
+  );
 }
 
 export default NewUsers;

@@ -13,7 +13,7 @@ const AddCabins = () => {
       {isOpenModal && (
         <Modal onClose={() => setIsOpenModal(false)}>
           <h2 className="text-2xl font-semibold mb-6">Add New Cabin</h2>
-          <CreateCabinForm onClose={() => setIsOpenModal(false)} />
+          <CreateCabinForm onCloseModal={() => setIsOpenModal(false)} />
         </Modal>
       )}
     </div>

@@ -118,11 +118,15 @@ export async function updateBooking(id, obj) {
 
 export async function deleteBooking(id) {
   // REMEMBER RLS POLICIES
-  const { data, error } = await supabase.from("bookings").delete().eq("id", id);
+  const { data, error } = await supabase.from("bookings").delete().eq("id", id).select();
 
   if (error) {
     console.error(error);
     throw new Error("Booking could not be deleted");
+  }
+  // If no rows deleted, probably unauthorized (RLS) or not found
+  if (!data || data.length === 0) {
+    throw new Error("Not authorized or booking not found");
   }
   return data;
 }

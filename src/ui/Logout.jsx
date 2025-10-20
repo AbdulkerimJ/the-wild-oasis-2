@@ -1,16 +1,18 @@
+import { FiLogOut } from "react-icons/fi";
 import useLogout from "../features/authentication/useLogout";
-
 
 const Logout = () => {
   const { logout, isPending: isLoggingOut } = useLogout();
+
   return (
     <button
-  disabled={isLoggingOut}
-  onClick={() => logout()}
-  className="min-w-[130px] px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md shadow-md transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 text-center"
->
-  {isLoggingOut ? "Logging out..." : "Logout"}
-</button>
+      disabled={isLoggingOut}
+      onClick={() => logout()}
+      className="flex items-center gap-2 text-gray-700 hover:text-gray-900"
+    >
+      <FiLogOut />
+      {isLoggingOut ? "Logging out..." : "Logout"}
+    </button>
   );
 };
 

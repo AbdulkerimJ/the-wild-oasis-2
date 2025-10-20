@@ -1,7 +1,15 @@
-const Form = ({ type = "default", children, ...props }) => {
+const Form = ({ type = "default", children, className = "", ...props }) => {
   return (
     <form
-      className="text-sm bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden p-4 m-2"
+      className={`
+        w-full max-w-3xl mx-auto
+        rounded-lg
+        border border-gray-200
+        bg-white
+        p-6 md:p-10
+        space-y-6
+        ${className}
+      `}
       {...props}
     >
       {children}
