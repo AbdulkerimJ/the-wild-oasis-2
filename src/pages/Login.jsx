@@ -1,4 +1,4 @@
-import LoginForm from "../ui/LoginForm";
+import LoginForm from "../features/authentication/LoginForm";
 import Logo from "../ui/Logo";
 
 function Login() {

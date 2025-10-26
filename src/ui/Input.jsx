@@ -1,6 +1,16 @@
-const Input = ({ label, id, error, register, rules = {}, className = "", ...props }) => {
+const Input = ({
+  label,
+  id,
+  error,
+  register,
+  rules = {},
+  className = "",
+  ...props
+}) => {
   return (
-    <div className={`w-full ${className} flex flex-col md:flex-row md:items-center md:gap-4`}>
+    <div
+      className={`w-full ${className} flex flex-col md:flex-row md:items-center md:gap-4`}
+    >
       {label && (
         <label
           htmlFor={id}
@@ -25,11 +35,11 @@ const Input = ({ label, id, error, register, rules = {}, className = "", ...prop
             placeholder-gray-400
             disabled:bg-gray-100 disabled:cursor-not-allowed
             transition-colors duration-150
-            ${error ? "border-red-500 focus:ring-red-500" : ""}
+            ${error ? "border-rose-500 focus:ring-rose-500" : ""}
           `}
         />
         {error && (
-          <span className="text-xs text-red-500 mt-1">
+          <span className="text-sm font-medium text-rose-600 mt-2 block">
             {error.message || error}
           </span>
         )}

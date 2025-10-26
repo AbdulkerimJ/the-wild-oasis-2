@@ -8,7 +8,7 @@ const Logout = () => {
     <button
       disabled={isLoggingOut}
       onClick={() => logout()}
-      className="flex items-center gap-2 text-gray-700 hover:text-gray-900"
+      className="flex items-center gap-2 text-gray-700 hover:text-gray-900 cursor-pointer"
     >
       <FiLogOut />
       {isLoggingOut ? "Logging out..." : "Logout"}
