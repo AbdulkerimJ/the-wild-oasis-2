@@ -7,25 +7,24 @@ const Filter = ({ filterField, options }) => {
 
   const handleClick = (value) => {
     searchParams.set(filterField, value);
-    if(searchParams.get("page")){
+    if (searchParams.get("page")) {
       searchParams.set("page", "1"); // Reset to first page on filter change
     }
     setSearchParams(searchParams);
   };
   return (
     <div>
-  {options.map((option) => (
-    <Button
-      variant={option.value === activeFilter ? "active" : "secondary"}
-      key={option.value}
-      onClick={() => handleClick(option.value)}
-      disabled = {option.value === activeFilter}
-    >
-      {option.label}
-    </Button>
-  ))}
-</div>
-
+      {options.map((option) => (
+        <Button
+          variant={option.value === activeFilter ? "active" : "secondary"}
+          key={option.value}
+          onClick={() => handleClick(option.value)}
+          disabled={option.value === activeFilter}
+        >
+          {option.label}
+        </Button>
+      ))}
+    </div>
   );
 };
 

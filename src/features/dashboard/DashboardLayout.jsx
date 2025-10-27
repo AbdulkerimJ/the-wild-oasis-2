@@ -1,8 +1,34 @@
-import styled from "styled-components";
+import useRecentBookings from "./useRecentBookings";
+import useRecentStays from "./useRecentStays";
+import { useCabins } from "../cabins/useCabins";
+import Loader from "../../ui/Loader";
+import Stats from "./Stats";
+import SalesChart from "./SalesChart";
 
-const StyledDashboardLayout = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto 34rem auto;
-  gap: 2.4rem;
-`;
+const DashboardLayout = () => {
+  // Fetch all data here at once
+  const { isPending: isLoadingBookings, bookings, numDays } = useRecentBookings();
+  const { isPending: isLoadingStays, confirmedStays } = useRecentStays();
+  const { isLoading: isLoadingCabins, cabins } = useCabins();
+
+  const isLoading = isLoadingBookings || isLoadingStays || isLoadingCabins;
+
+  // Unified loading check
+  if (isLoading) return <Loader />;
+
+  return (
+    <div className="flex flex-col gap-5 min-h-screen bg-blue-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 ">
+      <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+
+      <Stats
+        bookings={bookings}
+        confirmedStays={confirmedStays}
+        cabins={cabins}
+        numDays={numDays}
+      />
+      <SalesChart bookings={bookings} numDays={numDays} />
+    </div>
+  );
+};
+
+export default DashboardLayout;
