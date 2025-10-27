@@ -84,36 +84,45 @@ const SalesChart = ({ bookings, numDays }) => {
     background: "#fff",
   };
   return (
-  <div className="bg-white rounded-md shadow-sm border border-gray-200 p-6">
-    <h1 className="text-2xl font-bold text-gray-900 mb-6">Sales</h1>
-    <ResponsiveContainer width="100%" height={300}>
-      <AreaChart data={data}>
-        <XAxis dataKey="label" />
-        <YAxis unit="$" />
-        <CartesianGrid strokeDasharray="3" />
-        <Tooltip />
-        <Area
-          dataKey="totalSales"
-          type="monotone"
-          stroke={colors.totalSales.stroke}
-          fill={colors.totalSales.fill}
-          strokeWidth={2}
-          name="Total Sales"
-          unit="$"
-        />
-        <Area
-          dataKey="extrasSales"
-          type="monotone"
-          stroke={colors.extrasSales.stroke}
-          fill={colors.extrasSales.fill}
-          strokeWidth={2}
-          name="Extras Sales"
-          unit="$"
-        />
-      </AreaChart>
-    </ResponsiveContainer>
-  </div>
-);
+    <div className="bg-white rounded-md shadow-sm border border-gray-200 p-6">
+      <div className="mb-6">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight tracking-tight">
+          Sales Overview
+        </h1>
+        <p className="mt-1 text-sm md:text-base text-gray-500">
+          {format(allDates.at(0), "MMM dd, yyyy")} —{" "}
+          {format(allDates.at(-1), "MMM dd, yyyy")}
+        </p>
+      </div>
+
+      <ResponsiveContainer width="100%" height={300}>
+        <AreaChart data={data}>
+          <XAxis dataKey="label" />
+          <YAxis unit="$" />
+          <CartesianGrid strokeDasharray="3" />
+          <Tooltip />
+          <Area
+            dataKey="totalSales"
+            type="monotone"
+            stroke={colors.totalSales.stroke}
+            fill={colors.totalSales.fill}
+            strokeWidth={2}
+            name="Total Sales"
+            unit="$"
+          />
+          <Area
+            dataKey="extrasSales"
+            type="monotone"
+            stroke={colors.extrasSales.stroke}
+            fill={colors.extrasSales.fill}
+            strokeWidth={2}
+            name="Extras Sales"
+            unit="$"
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
+  );
 };
 
 export default SalesChart;
