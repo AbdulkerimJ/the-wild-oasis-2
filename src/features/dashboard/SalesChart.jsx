@@ -84,8 +84,8 @@ const SalesChart = ({ bookings, numDays }) => {
     background: "#fff",
   };
   return (
-    <div className="bg-white rounded-md shadow-sm border border-gray-200 p-6">
-      <div className="mb-6">
+    <div className="bg-white rounded-md border border-indigo-100 p-6 h-[50vh]">
+      <div className="mb-6" height= "20%">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight tracking-tight">
           Sales Overview
         </h1>
@@ -95,7 +95,7 @@ const SalesChart = ({ bookings, numDays }) => {
         </p>
       </div>
 
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height="80%">
         <AreaChart data={data}>
           <XAxis dataKey="label" />
           <YAxis unit="$" />

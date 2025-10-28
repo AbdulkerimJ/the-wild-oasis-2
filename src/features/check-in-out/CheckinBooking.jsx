@@ -29,7 +29,7 @@ function CheckinBooking() {
   if (isCheckingBooking || isFetchingSettings) return <Loader />;
 
   const {
-    id: bookingId,
+    id,
     startDate,
     endDate,
     numNights,
@@ -55,7 +55,7 @@ function CheckinBooking() {
     if (!confirmPaid) return;
     if (addBreakfast) {
       checkin({
-        bookingId,
+        id,
         breakfast: {
           hasBreakfast: true,
           extrasPrice: optionalBreakfastPrice,
@@ -63,7 +63,7 @@ function CheckinBooking() {
         },
       });
     } else {
-      checkin({ bookingId, breakfast: {} });
+      checkin({ id, breakfast: {} });
     }
   };
 
@@ -76,7 +76,7 @@ function CheckinBooking() {
             <h1 className="text-lg font-semibold tracking-tight text-gray-900">
               Confirm Check-In —{" "}
               <span className="bg-indigo-100 text-indigo-700 px-1 py-0.5 rounded">
-                Booking #{bookingId}
+                Booking #{id}
               </span>
             </h1>
             <p className="text-gray-500 text-sm mt-1">
@@ -149,7 +149,7 @@ function CheckinBooking() {
                   <MdLocalDining className="text-indigo-600 text-lg" />
                 </div>
                 <Checkbox
-                  id={`${bookingId}-breakfast`}
+                  id={`${id}-breakfast`}
                   label={
                     <span className="text-sm font-medium text-gray-700">
                       Add breakfast for{" "}
@@ -175,7 +175,7 @@ function CheckinBooking() {
                 <MdAttachMoney className="text-indigo-700 text-xl" />
               </div>
               <Checkbox
-                id={`${bookingId}-payment`}
+                id={`${id}-payment`}
                 label={
                   <span className="text-sm font-medium text-gray-800 leading-relaxed">
                     I confirm that{" "}
