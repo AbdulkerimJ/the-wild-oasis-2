@@ -1,22 +1,11 @@
-import styled from "styled-components";
-
-const ChartBox = styled.div`
-  /* Box */
-  background-color: var(--color-grey-0);
-  border: 1px solid var(--color-grey-100);
-  border-radius: var(--border-radius-md);
-
-  padding: 2.4rem 3.2rem;
-  grid-column: 3 / span 2;
-
-  & > *:first-child {
-    margin-bottom: 1.6rem;
-  }
-
-  & .recharts-pie-label-text {
-    font-weight: 600;
-  }
-`;
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
 const startDataLight = [
   {
@@ -130,3 +119,56 @@ function prepareData(startData, stays) {
 
   return data;
 }
+
+const DurationChart = ({ confirmedStays }) => {
+  const data = prepareData(startDataLight, confirmedStays);
+  return (
+    <ResponsiveContainer width="100%" height={300}>
+      <div>Duration Chart Placeholder</div>
+      <PieChart>
+        <Pie
+          data={data}
+          nameKey="duration"
+          dataKey="value"
+          innerRadius={85}
+          outerRadius={120}
+          paddingAngle={3}
+        >
+          {data.map((entry, index) => (
+            <Cell key={index} fill={entry.color} stroke={entry.color} />
+          ))}
+        </Pie>
+        <Tooltip
+          formatter={(value, name) => [`${value} stays`, `${name}`]}
+          contentStyle={{
+            backgroundColor: "rgba(255, 255, 255, 0.95)", 
+            borderRadius: "6px",
+            border: "1px solid #e5e7eb",
+            padding: "6px 10px",
+            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
+            fontSize: "0.85rem",
+            color: "#374151",
+          }}
+          itemStyle={{
+            color: "#374151",
+            textTransform: "capitalize",
+          }}
+          labelStyle={{
+            fontWeight: "600",
+            marginBottom: "4px",
+          }}
+        />
+        <Legend
+          verticalAlign="middle"
+          align="right"
+          width="30%"
+          layout="vertical"
+          iconSize={15}
+          iconType="circle"
+        />
+      </PieChart>
+    </ResponsiveContainer>
+  );
+};
+
+export default DurationChart;

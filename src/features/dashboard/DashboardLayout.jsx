@@ -4,6 +4,7 @@ import { useCabins } from "../cabins/useCabins";
 import Loader from "../../ui/Loader";
 import Stats from "./Stats";
 import SalesChart from "./SalesChart";
+import DurationChart from "./DurationChart";
 
 const DashboardLayout = () => {
   // Fetch all data here at once
@@ -26,6 +27,7 @@ const DashboardLayout = () => {
         cabins={cabins}
         numDays={numDays}
       />
+      <DurationChart confirmedStays={confirmedStays} />
       <SalesChart bookings={bookings} numDays={numDays} />
     </div>
   );
