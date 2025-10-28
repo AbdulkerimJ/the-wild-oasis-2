@@ -30,7 +30,7 @@ const SignupForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-lg mx-auto bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-100 space-y-6"
+      className="max-w-lg mx-auto bg-white backdrop-blur-md p-8 rounded-sm border border-gray-100 space-y-6"
     >
       <h2 className="text-2xl font-semibold text-gray-900 text-center mb-4">
         Create Your Account

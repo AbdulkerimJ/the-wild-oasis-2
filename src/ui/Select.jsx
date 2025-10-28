@@ -3,7 +3,7 @@ const Select = ({ options, onChange, value }) => {
     <select
       value={value}
       onChange={onChange}
-      className="block w-full appearance-none rounded-lg border border-gray-200 bg-white py-3 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      className="block rounded-sm border border-indigo-200 bg-indigo-50 mx-0.5 py-1.5 px-4 text-sm font-medium text-gray-900 transition-all duration-200  hover:shadow-sm focus:outline-none focus:ring-2 cursor-pointer"
     >
       {options.map((option) => (
         <option key={option.value} value={option.value}>

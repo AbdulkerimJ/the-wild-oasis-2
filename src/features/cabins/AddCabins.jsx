@@ -6,7 +6,7 @@ import Button from "../../ui/Button";
 const AddCabins = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   return (
-    <div>
+    <div className="mt-6">
       <Button onClick={() => setIsOpenModal(true)} className="mb-6">
         Add New Cabin
       </Button>

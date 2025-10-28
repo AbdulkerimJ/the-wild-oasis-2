@@ -40,8 +40,7 @@ const CabinTable = ({ cabins = [] }) => {
   };
 
   return (
-    <div className="p-2 sm:p-6 bg-gray-50 min-h-screen">
-      <div className="overflow-hidden rounded-xl shadow-lg">
+      <div className="overflow-hidden rounded-md">
         <div className="overflow-x-auto rounded-lg relative border border-gray-200">
           <table className="min-w-full divide-y divide-gray-200 bg-white">
             <thead className="bg-gradient-to-r from-blue-50 to-indigo-50">
@@ -143,7 +142,6 @@ const CabinTable = ({ cabins = [] }) => {
           </table>
         </div>
       </div>
-    </div>
   );
 };
 

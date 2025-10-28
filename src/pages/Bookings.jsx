@@ -3,7 +3,7 @@ import BookingTableOperations from "../features/bookings/BookingTableOperations"
 
 function Bookings() {
   return (
-    <div>
+    <div className="overflow-x-auto">
       <h1 className="text-2xl font-bold">All bookings</h1>
       <BookingTableOperations />
       <BookingTable />

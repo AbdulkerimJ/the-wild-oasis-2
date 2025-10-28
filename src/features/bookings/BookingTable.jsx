@@ -12,47 +12,47 @@ const BookingTable = () => {
   if (!bookings?.length) return <Empty resourceName="bookings" />;
 
   return (
-    <>
-      <div className="p-6 bg-gray-50 min-h-screen">
-        <div className="overflow-hidden rounded-xl shadow-lg">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 bg-white">
-              <thead className="bg-gradient-to-r from-blue-50 to-indigo-50">
-                <tr>
-                  {[
-                    "Cabin",
-                    "Guest",
-                    "Check-In",
-                    "Check-Out",
-                    "Nights",
-                    "Guests",
-                    "Total Price",
-                    "Status",
-                    "Breakfast",
-                    "Paid",
-                  ].map((header) => (
-                    <th
-                      key={header}
-                      className="px-6 py-4 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider"
-                    >
-                      {header}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-
-              <tbody className="bg-white divide-y divide-gray-200">
-                {bookings.map((booking) => (
-                  <BookingRow key={booking.id} booking={booking} />
+    <div className="flex justify-center">
+      <div className="w-full max-w-7xl">
+        <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
+          <table className="min-w-full divide-y divide-gray-200 bg-white text-sm">
+            <thead className="bg-gradient-to-r bg-blue-50">
+              <tr>
+                {[
+                  "Cabin",
+                  "Guest",
+                  "Check-In",
+                  "Check-Out",
+                  "Nights",
+                  "Guests",
+                  "Total Price",
+                  "Status",
+                  "Breakfast",
+                  "Paid",
+                ].map((header) => (
+                  <th
+                    key={header}
+                    className="px-6 py-3.5 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider whitespace-nowrap"
+                  >
+                    {header}
+                  </th>
                 ))}
-              </tbody>
-            </table>
-          </div>
+              </tr>
+            </thead>
+
+            <tbody className="bg-white divide-y divide-gray-100">
+              {bookings.map((booking) => (
+                <BookingRow key={booking.id} booking={booking} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="mt-6">
+          <Pagination count={count} />
         </div>
       </div>
-
-      <Pagination count={count} />
-    </>
+    </div>
   );
 };
 

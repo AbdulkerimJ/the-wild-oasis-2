@@ -2,8 +2,6 @@ import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { useSearchParams } from "react-router-dom";
 import { PAGE_SIZE } from "../utils/constants";
 
-
-
 const Pagination = ({ count }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = !searchParams.get("page")
@@ -24,10 +22,14 @@ const Pagination = ({ count }) => {
     setSearchParams(searchParams);
   };
 
-  if( totalPages <= 1) return null;
+  if (totalPages <= 1) return null;
   return (
-    <div className="flex justify-around text-center text-sm text-gray-600 rounded-md font-sans">
-      Showing {(currentPage - 1) * PAGE_SIZE + 1} to {currentPage === totalPages ? count : currentPage * PAGE_SIZE} of {count} results
+    <div className="flex justify-end items-center gap-6 text-sm text-gray-600 rounded-md font-sans mb-2">
+      <span className="text-sm text-gray-600">
+        Showing {(currentPage - 1) * PAGE_SIZE + 1} to{" "}
+        {currentPage === totalPages ? count : currentPage * PAGE_SIZE} of {count}{" "}
+        results
+      </span>
       <div className="flex items-center justify-center gap-4">
         <button
           onClick={prevPage}

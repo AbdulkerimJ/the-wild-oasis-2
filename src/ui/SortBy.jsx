@@ -11,7 +11,7 @@ const SortBy = ({ options }) => {
     setSearchParams(searchParams);
   };
   return (
-    <div className="ml-4">
+    <div className="">
       <Select value={sortBy} options={options} onChange={handleChange} />
     </div>
   );

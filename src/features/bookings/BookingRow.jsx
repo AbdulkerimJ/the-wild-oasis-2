@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
-const formatDate = (dateString) => {
-  return new Date(dateString).toLocaleDateString("en-US", {
+const formatDate = (dateString) =>
+  new Date(dateString).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
   });
-};
 
 const getStatusClasses = (status) => {
   const lowerStatus = status.toLowerCase();
@@ -21,7 +20,6 @@ const getStatusClasses = (status) => {
       return "bg-gray-100 text-gray-800";
   }
 };
-
 
 const BookingRow = ({ booking }) => {
   const navigate = useNavigate();
@@ -39,32 +37,33 @@ const BookingRow = ({ booking }) => {
     isPaid,
   } = booking;
 
-
   return (
-    <tr className="hover:bg-gray-50 transition-colors duration-200 cursor-pointer" onClick={() => navigate(`/bookings/${id}`)} >
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <tr
+      className="hover:bg-gray-50 transition-colors duration-200 cursor-pointer"
+      onClick={() => navigate(`/bookings/${id}`)}
+    >
+      <td className="px-6 py-3.5 text-sm text-gray-500 whitespace-nowrap">
         {cabins.name}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td className="px-6 py-3.5 text-sm font-medium text-gray-900 whitespace-nowrap">
         {guests.fullName}
       </td>
-
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      <td className="px-6 py-3.5 text-sm text-gray-500 whitespace-nowrap">
         {formatDate(startDate)}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      <td className="px-6 py-3.5 text-sm text-gray-500 whitespace-nowrap">
         {formatDate(endDate)}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      <td className="px-6 py-3.5 text-sm text-gray-500 whitespace-nowrap">
         {numNights}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      <td className="px-6 py-3.5 text-sm text-gray-500 whitespace-nowrap">
         {numGuests}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td className="px-6 py-3.5 text-sm font-medium text-gray-900 whitespace-nowrap">
         ${totalPrice}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap">
+      <td className="px-6 py-3.5 whitespace-nowrap">
         <span
           className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusClasses(
             status
@@ -73,20 +72,15 @@ const BookingRow = ({ booking }) => {
           {status.toUpperCase()}
         </span>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm">
-        {hasBreakfast ? (
-          <span className="text-green-600">Yes</span>
-        ) : (
-          <span className="text-gray-400">No</span>
-        )}
+      <td className="px-6 py-3.5 text-sm whitespace-nowrap">
+        <span className={hasBreakfast ? "text-green-600" : "text-gray-400"}>
+          {hasBreakfast ? "Yes" : "No"}
+        </span>
       </td>
-      
-      <td className="px-6 py-4 whitespace-nowrap text-sm">
-        {isPaid ? (
-          <span className="text-green-600">Yes</span>
-        ) : (
-          <span className="text-red-600">No</span>
-        )}
+      <td className="px-6 py-3.5 text-sm whitespace-nowrap">
+        <span className={isPaid ? "text-green-600" : "text-red-600"}>
+          {isPaid ? "Yes" : "No"}
+        </span>
       </td>
     </tr>
   );

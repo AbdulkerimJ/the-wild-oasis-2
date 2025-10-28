@@ -18,7 +18,7 @@ const Cabins = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-semibold mb-8">All cabins</h1>
+      <h1 className="text-2xl font-semibold">All cabins</h1>
       <CabinTableOperations />
       <CabinsTable cabins={cabins} />
       <AddCabins />

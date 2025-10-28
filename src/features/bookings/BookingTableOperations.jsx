@@ -3,7 +3,7 @@ import Filter from "../../ui/Filter";
 
 function BookingTableOperations() {
   return (
-    <div className="flex justify-end">
+    <div className="flex flex-wrap justify-end gap-2 mb-4">
       <Filter
         filterField="status"
         options={[
@@ -18,10 +18,7 @@ function BookingTableOperations() {
         options={[
           { value: "startDate-desc", label: "Sort by date (recent first)" },
           { value: "startDate-asc", label: "Sort by date (earlier first)" },
-          {
-            value: "totalPrice-desc",
-            label: "Sort by amount (high first)",
-          },
+          { value: "totalPrice-desc", label: "Sort by amount (high first)" },
           { value: "totalPrice-asc", label: "Sort by amount (low first)" },
         ]}
       />

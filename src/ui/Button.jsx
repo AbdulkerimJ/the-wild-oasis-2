@@ -1,80 +1,80 @@
 const sizes = {
-  small: "text-sm px-3 py-1.5 rounded-md",
-  medium: "text-base px-4 py-2 rounded-lg",
-  large: "text-lg px-6 py-3 rounded-xl",
+  sm: "text-sm px-3 py-1.5 rounded-sm",
+  md: "text-base px-4 py-2 rounded-sm",
+  lg: "text-lg px-6 py-3 rounded-sm",
 };
 
 const baseClasses = `
-  inline-flex items-center justify-center
-  font-semibold leading-none
-  shadow-lg shadow-gray-200/50 backdrop-blur-sm cursor-pointer
+  inline-flex items-center justify-center gap-2 mx-0.5
+  font-medium leading-none
   transition-all duration-300 ease-out
-  transform hover:scale-105 active:scale-95
+  transform hover:scale-[1.03] active:scale-[0.97]
   focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-white
-  disabled:shadow-sm disabled:cursor-not-allowed disabled:opacity-50
+  disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer
 `;
 
-const variations = {
+const variants = {
   primary: `
-    ${baseClasses}
-    bg-gradient-to-r from-gray-800 via-gray-900 to-gray-950 text-white
-    hover:from-gray-700 hover:via-gray-800 hover:to-gray-900 hover:shadow-xl hover:shadow-gray-900/25
-    active:from-gray-600 active:via-gray-700 active:to-gray-800
-    focus:ring-gray-500/30
-    disabled:from-gray-400 disabled:via-gray-500 disabled:to-gray-600
+    bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white
+    shadow-md hover:shadow-lg hover:shadow-gray-900/20
+    focus:ring-gray-500/40
   `,
   secondary: `
-    ${baseClasses}
-    bg-white/80 text-gray-900 border border-gray-200/60
-    hover:bg-gray-50/80 hover:border-gray-300/80 hover:shadow-xl hover:shadow-gray-200/25
-    active:bg-gray-100/80 active:border-gray-400/60
+    bg-white/80 text-gray-900 border border-gray-300
+    hover:bg-gray-100 hover:border-gray-400 hover:shadow-sm
     focus:ring-gray-300/30
-    disabled:bg-gray-100/50 disabled:text-gray-500 disabled:border-gray-300/50
   `,
   success: `
-    ${baseClasses}
     bg-gradient-to-r from-emerald-600 via-emerald-700 to-emerald-800 text-white
-    hover:from-emerald-500 hover:via-emerald-600 hover:to-emerald-700 hover:shadow-xl hover:shadow-emerald-500/25
-    active:from-emerald-700 active:via-emerald-800 active:to-emerald-900
-    focus:ring-emerald-400/30
-    disabled:from-emerald-400 disabled:via-emerald-500 disabled:to-emerald-600
+    hover:from-emerald-500 hover:to-emerald-700
+    focus:ring-emerald-400/40
   `,
   danger: `
-    ${baseClasses}
     bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white
-    hover:from-red-500 hover:via-red-600 hover:to-red-700 hover:shadow-xl hover:shadow-red-500/25
-    active:from-red-700 active:via-red-800 active:to-red-900
-    focus:ring-red-400/30
-    disabled:from-red-400 disabled:via-red-500 disabled:to-red-600
+    hover:from-red-500 hover:to-red-700
+    focus:ring-red-400/40
   `,
   ghost: `
-    ${baseClasses}
-    bg-white/50 text-gray-800 border border-gray-200/50
-    hover:bg-gray-100/80 hover:border-gray-300/60 hover:shadow-md hover:shadow-gray-200/20
-    active:bg-gray-200/80 active:border-gray-400/60
-    focus:ring-gray-300/30
-    disabled:bg-gray-50/30 disabled:text-gray-500 disabled:border-gray-300/30
+    bg-transparent text-gray-700 border border-gray-300
+    hover:bg-gray-100
+    focus:ring-gray-300/40
   `,
-  active: `
-    ${baseClasses}
-    bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white
-    hover:from-blue-500 hover:via-blue-600 hover:to-blue-700 hover:shadow-xl hover:shadow-blue-500/25
-    active:from-blue-700 active:via-blue-800 active:to-blue-900
+  outline: `
+    bg-transparent border-2 border-gray-700 text-gray-800
+    hover:bg-gray-800 hover:text-white
+    focus:ring-gray-500/30
+  `,
+  link: `
+    bg-transparent text-blue-600 underline-offset-4 hover:underline
     focus:ring-blue-400/30
-    disabled:from-blue-400 disabled:via-blue-500 disabled:to-blue-600
   `,
 };
 
-function Button({ size = "medium", variant = "primary", children, className = "", disabled, ...props }) {
+export default function Button({
+  size = "md",
+  variant = "primary",
+  children,
+  className = "",
+  disabled = false,
+  icon: Icon,
+  ...props
+}) {
+  const classes = `
+    ${baseClasses}
+    ${sizes[size] || ""}
+    ${variants[variant] || ""}
+    ${className}
+  `.trim();
+
   return (
     <button
-      className={`${sizes[size]} ${variations[variant]} ${className}`}
+      type="button"
       disabled={disabled}
+      className={classes}
       {...props}
     >
-      {children}
+      {Icon && <Icon className="w-4 h-4" />}
+      <span>{children}</span>
     </button>
   );
 }
-
-export default Button;
