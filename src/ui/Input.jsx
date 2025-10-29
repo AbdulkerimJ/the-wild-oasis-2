@@ -10,7 +10,7 @@ const Input = ({
 }) => {
   return (
     <div
-      className={`w-full ${className} flex flex-col md:flex-row md:items-center md:gap-4`}
+      className={`w-full ${className} flex flex-col md:flex-row md:items-center md:gap-4 md:justify-between `}
     >
       {label && (
         <label
@@ -33,7 +33,7 @@ const Input = ({
             {...(register ? register(id, rules) : {})}
             {...props}
             className={`
-              w-full md:w-80 px-4 py-2 rounded-lg text-gray-800 text-sm
+              w-full md:w-50 px-4 py-2 rounded-lg text-gray-800 text-sm
               bg-gray-50 border border-gray-300
               focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500
               placeholder-gray-400

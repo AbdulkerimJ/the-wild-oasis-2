@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import Input from "../../ui/Input";
 import useSignup from "./useSignup";
+import { MdPerson, MdEmail, MdLock } from "react-icons/md";
 
 const SignupForm = () => {
   const { signup, isPending: isSigningUp } = useSignup();
@@ -28,44 +29,34 @@ const SignupForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="max-w-lg mx-auto bg-white backdrop-blur-md p-8 rounded-sm border border-gray-100 space-y-6"
-    >
-      <h2 className="text-2xl font-semibold text-gray-900 text-center mb-4">
-        Create Your Account
-      </h2>
+    <div className="max-w-2xl mx-auto w-full">
+      {/* Heading outside the form */}
+      <h1 className="text-2xl font-semibold text-gray-900 mb-8 text-center">
+        Create Employee Account
+      </h1>
 
-      {/* Full Name */}
-      <div className="flex items-center gap-4">
-        <label
-          htmlFor="fullName"
-          className="w-1/3 text-right text-sm font-medium text-gray-700"
-        >
-          Full Name
-        </label>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white p-8 rounded-lg border border-indigo-100 space-y-6"
+      >
+        {/* Full Name */}
         <Input
           id="fullName"
+          label="Full Name"
           register={register}
           rules={{ required: "Full name is required" }}
           error={errors.fullName?.message}
           placeholder="Enter your full name"
-          className="flex-1"
-          disabled = {isSigningUp}
+          icon={<MdPerson className="text-blue-500 text-xl" />}
+          className="w-full"
+          disabled={isSigningUp}
         />
-      </div>
 
-      {/* Email */}
-      <div className="flex items-center gap-4">
-        <label
-          htmlFor="email"
-          className="w-1/3 text-right text-sm font-medium text-gray-700"
-        >
-          Email
-        </label>
+        {/* Email */}
         <Input
           id="email"
           type="email"
+          label="Email"
           register={register}
           rules={{
             required: "Email is required",
@@ -76,22 +67,16 @@ const SignupForm = () => {
           }}
           error={errors.email?.message}
           placeholder="you@example.com"
-          className="flex-1"
-          disabled = {isSigningUp}
+          icon={<MdEmail className="text-blue-500 text-xl" />}
+          className="w-full"
+          disabled={isSigningUp}
         />
-      </div>
 
-      {/* Password */}
-      <div className="flex items-center gap-4">
-        <label
-          htmlFor="password"
-          className="w-1/3 text-right text-sm font-medium text-gray-700"
-        >
-          Password
-        </label>
+        {/* Password */}
         <Input
           id="password"
           type="password"
+          label="Password"
           register={register}
           rules={{
             required: "Password is required",
@@ -102,22 +87,16 @@ const SignupForm = () => {
           }}
           error={errors.password?.message}
           placeholder="Enter your password"
-          className="flex-1"
-          disabled = {isSigningUp}
+          icon={<MdLock className="text-blue-500 text-xl" />}
+          className="w-full"
+          disabled={isSigningUp}
         />
-      </div>
 
-      {/* Confirm Password */}
-      <div className="flex items-center gap-4">
-        <label
-          htmlFor="confirmPassword"
-          className="w-1/3 text-right text-sm font-medium text-gray-700"
-        >
-          Confirm
-        </label>
+        {/* Confirm Password */}
         <Input
           id="confirmPassword"
           type="password"
+          label="Confirm"
           register={register}
           rules={{
             required: "Please confirm your password",
@@ -125,30 +104,31 @@ const SignupForm = () => {
           }}
           error={errors.confirmPassword?.message}
           placeholder="Confirm your password"
-          className="flex-1"
-          disabled = {isSigningUp}
+          icon={<MdLock className="text-blue-500 text-xl" />}
+          className="w-full"
+          disabled={isSigningUp}
         />
-      </div>
 
-      {/* Buttons */}
-      <div className="flex justify-end items-center gap-4 mt-6">
-        <button
-          type="button"
-          onClick={handleCancel}
-          className="px-5 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 transition-all disabled:cursor-not-allowed disabled:opacity-50"
-          disabled = {isSigningUp}
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className="px-6 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm transition-all disabled:cursor-not-allowed disabled:opacity-50"
-          disabled = {isSigningUp}
-        >
-          Register
-        </button>
-      </div>
-    </form>
+        {/* Buttons */}
+        <div className="flex justify-end items-center gap-4 mt-6">
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="px-5 py-2 rounded-md border border-gray-600 text-gray-700 hover:bg-gray-100 transition-all disabled:cursor-not-allowed disabled:opacity-50"
+            disabled={isSigningUp}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="px-6 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm transition-all disabled:cursor-not-allowed disabled:opacity-50"
+            disabled={isSigningUp}
+          >
+            Register
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

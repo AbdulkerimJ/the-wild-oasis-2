@@ -20,7 +20,7 @@ const Cabins = () => {
     <>
       <h1 className="text-2xl font-semibold">All cabins</h1>
       <CabinTableOperations />
-      <CabinsTable cabins={cabins} />
+        <CabinsTable cabins={cabins} />
       <AddCabins />
    
     </>

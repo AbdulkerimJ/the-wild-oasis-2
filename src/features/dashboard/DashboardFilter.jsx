@@ -2,7 +2,6 @@ import Filter from "../../ui/Filter";
 
 function DashboardFilter() {
   return (
-    <div className="flex justify-end">
       <Filter
         filterField="last"
         options={[
@@ -11,7 +10,6 @@ function DashboardFilter() {
           { value: "90", label: "Last 90 days" },
         ]}
       />
-    </div>
   );
 }
 

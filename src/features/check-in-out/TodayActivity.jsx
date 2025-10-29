@@ -7,7 +7,7 @@ function TodayActivity() {
   const { isPending: isLoading, data: activities } = useTodayActivity();
 
   return (
-    <div className="bg-white rounded-md p-6 border border-indigo-100 h-[50vh]">
+    <div className="bg-white rounded-md p-6 border border-indigo-100 h-[40vh]">
       {/* Header */}
       <h2 className="text-lg font-semibold text-gray-800 mb-2">Today</h2>
 

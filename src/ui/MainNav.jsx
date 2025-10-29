@@ -16,23 +16,23 @@ const navItems = [
 
 const MainNav = () => {
   return (
-    <nav>
-      <ul className="flex flex-col gap-2">
+    <nav className="w-full">
+      <ul className="flex flex-row sm:flex-col gap-2 w-full">
         {navItems.map((item) => (
-          <li key={item.to} className="group">
+          <li key={item.to} className="flex-1">
             <NavLink
               to={item.to}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-6 py-3 text-gray-600 text-base font-medium rounded-lg transition-all
-      ${isActive ? "bg-gray-100 text-gray-800" : "hover:bg-gray-50"}`
+                `flex flex-col sm:flex-row items-center sm:items-center sm:justify-start justify-center gap-1 px-4 py-3 text-sm font-medium rounded-lg transition-all w-full
+                ${
+                  isActive
+                    ? "bg-gray-100 text-blue-600"
+                    : "text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                }`
               }
             >
-              <span className="text-2xl text-gray-400 transition-all group-hover:text-blue-600">
-                {item.icon}
-              </span>
-              <span className="text-gray-600 transition-all">
-                {item.label}
-              </span>
+              <span className="text-2xl text-current">{item.icon}</span>
+              <span className="text-current">{item.label}</span>
             </NavLink>
           </li>
         ))}

@@ -35,7 +35,7 @@ function UpdateSettingsForm() {
   if (isPending) return <Loader />;
 
   return (
-    <>
+    <div className="max-w-2xl mx-auto w-full">
       <h2 className="text-2xl font-semibold text-gray-900 mb-8 text-center">
         Update Booking Settings
       </h2>
@@ -88,7 +88,7 @@ function UpdateSettingsForm() {
           Updating settings...
         </p>
       )}
-    </>
+    </div>
   );
 }
 

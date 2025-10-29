@@ -56,7 +56,7 @@ const DurationChart = ({ confirmedStays }) => {
   const data = prepareData(startDataLight, confirmedStays);
 
   return (
-    <div className="bg-white rounded-md p-4 border border-indigo-100 flex flex-col h-[50vh] ">
+    <div className="bg-white rounded-md p-4 border border-indigo-100 flex flex-col h-[40vh] ">
       <h2 className="text-lg font-semibold text-gray-800 mb-4">Stay Durations</h2>
       <div className="flex-1 min-h-[200px]">
         <ResponsiveContainer width="100%" height="100%">
