@@ -13,9 +13,10 @@ const Filter = ({ filterField, options }) => {
     setSearchParams(searchParams);
   };
   return (
-    <div className="flex justify-center sm:justify-end gap-2 mb-1 sm:mb-4 ">
+    <div className=" flex justify-center sm:justify-end gap-2 mb-1 sm:mb-4 ">
       {options.map((option) => (
         <Button
+        size="sm"
           variant={option.value === activeFilter ? "active" : "secondary"}
           key={option.value}
           onClick={() => handleClick(option.value)}

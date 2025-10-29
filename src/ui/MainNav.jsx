@@ -23,7 +23,7 @@ const MainNav = () => {
             <NavLink
               to={item.to}
               className={({ isActive }) =>
-                `flex flex-col sm:flex-row items-center sm:items-center sm:justify-start justify-center gap-1 px-4 py-3 text-sm font-medium rounded-lg transition-all w-full
+                `flex flex-col sm:flex-row items-center sm:items-center sm:justify-start justify-center gap-1 px-1 py-3 text-sm font-medium rounded-lg transition-all w-full
                 ${
                   isActive
                     ? "bg-gray-100 text-blue-600"
