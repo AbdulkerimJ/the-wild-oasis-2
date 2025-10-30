@@ -15,7 +15,7 @@ const LoginForm = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4 py-8 sm:px-6">
-      <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-800 rounded-md shadow-lg overflow-hidden">
+      <div className="flex flex-col sm:flex-row w-full max-w-4xl bg-gray-800 rounded-md shadow-lg overflow-hidden">
         {/* Image / Branding Section */}
         <div className="md:w-1/2 w-full flex items-center justify-center bg-gray-900 p-6 md:p-10">
           <img
