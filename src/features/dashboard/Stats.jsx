@@ -28,7 +28,7 @@ const Stats = ({ bookings, confirmedStays, cabins, numDays }) => {
     : 0;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1 sm:gap-6">
       <Stat
         icon={<HiOutlineBriefcase className="text-blue-500 dark:text-blue-400" />}
         title="Bookings"
