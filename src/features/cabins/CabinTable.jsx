@@ -48,7 +48,7 @@ const CabinTable = ({ cabins = [] }) => {
 
   return (
     <div className="max-w-7xl overflow-hidden rounded-md flex flex-col w-full mx-auto">
-      <div className="overflow-x-auto rounded-lg relative border border-gray-200">
+      <div className="overflow-x-auto sm:text-left rounded-lg relative border border-gray-200">
         <table className="min-w-full divide-y divide-gray-200 bg-white">
           <thead className="bg-gradient-to-r from-blue-50 to-indigo-50">
             <tr>
@@ -56,7 +56,7 @@ const CabinTable = ({ cabins = [] }) => {
                 (header) => (
                   <th
                     key={header}
-                    className="px-2 py-2 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider sm:px-6 sm:py-4"
+                    className="px-2 py-2 text-xs font-semibold text-gray-900 uppercase tracking-wider sm:px-6 sm:py-4"
                   >
                     {header}
                   </th>
@@ -77,7 +77,7 @@ const CabinTable = ({ cabins = [] }) => {
                   className="hover:bg-gray-50 transition-colors duration-200"
                 >
                   {/* Index */}
-                  <td className="px-2 py-3 whitespace-nowrap text-xs font-medium text-gray-900 sm:px-6 sm:py-4">
+                  <td className="px-2 sm:px-0 py-3 whitespace-nowrap text-xs font-medium text-gray-900 sm:px-6 sm:py-4">
                     {index + 1}
                   </td>
 
