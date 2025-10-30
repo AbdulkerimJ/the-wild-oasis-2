@@ -42,28 +42,28 @@ const BookingRow = ({ booking }) => {
       className="hover:bg-gray-50 transition-colors duration-200 cursor-pointer"
       onClick={() => navigate(`/bookings/${id}`)}
     >
-      <td className="px-6 py-3.5 text-sm text-gray-500 whitespace-nowrap">
+      <td className="px-9 py-3.5 text-sm text-gray-500 whitespace-nowrap">
         {cabins.name}
       </td>
-      <td className="px-6 py-3.5 text-sm font-medium text-gray-900 whitespace-nowrap">
+      <td className="px-4 py-3.5 text-sm font-medium text-gray-900 whitespace-nowrap">
         {guests.fullName}
       </td>
-      <td className="px-6 py-3.5 text-sm text-gray-500 whitespace-nowrap">
+      <td className="px-8 py-3.5 text-sm text-gray-500 whitespace-nowrap">
         {formatDate(startDate)}
       </td>
       <td className="px-6 py-3.5 text-sm text-gray-500 whitespace-nowrap">
         {formatDate(endDate)}
       </td>
-      <td className="px-6 py-3.5 text-sm text-gray-500 whitespace-nowrap">
+      <td className="px-10 py-3.5 text-sm text-gray-500 whitespace-nowrap">
         {numNights}
       </td>
-      <td className="px-6 py-3.5 text-sm text-gray-500 whitespace-nowrap">
+      <td className="px-10 py-3.5 text-sm text-gray-500 whitespace-nowrap">
         {numGuests}
       </td>
-      <td className="px-6 py-3.5 text-sm font-medium text-gray-900 whitespace-nowrap">
+      <td className="px-10 py-3.5 text-sm font-medium text-gray-900 whitespace-nowrap">
         ${totalPrice}
       </td>
-      <td className="px-6 py-3.5 whitespace-nowrap">
+      <td className="px-4 py-3.5 whitespace-nowrap">
         <span
           className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusClasses(
             status
@@ -72,12 +72,12 @@ const BookingRow = ({ booking }) => {
           {status.toUpperCase()}
         </span>
       </td>
-      <td className="px-6 py-3.5 text-sm whitespace-nowrap">
+      <td className="px-14 py-3.5 text-sm whitespace-nowrap">
         <span className={hasBreakfast ? "text-green-600" : "text-gray-400"}>
           {hasBreakfast ? "Yes" : "No"}
         </span>
       </td>
-      <td className="px-6 py-3.5 text-sm whitespace-nowrap">
+      <td className="px-10 py-3.5 text-sm whitespace-nowrap">
         <span className={isPaid ? "text-green-600" : "text-red-600"}>
           {isPaid ? "Yes" : "No"}
         </span>

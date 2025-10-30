@@ -32,7 +32,7 @@ const BookingTable = () => {
                 ].map((header) => (
                   <th
                     key={header}
-                    className="px-6 py-3.5 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider whitespace-nowrap"
+                    className="px-8 py-3.5 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider whitespace-nowrap"
                   >
                     {header}
                   </th>
