@@ -16,10 +16,13 @@ const Checkbox = ({
         checked={checked}
         onChange={onChange}
         disabled={disabled}
-        className="w-5 h-5 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-5 h-5 text-indigo-600 bg-gray-100 dark:bg-gray-900 border-gray-300 dark:border-gray-700 rounded focus:ring-indigo-500 dark:focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed"
       />
       {label && (
-        <label htmlFor={id} className={`text-gray-700 select-none`}>
+        <label
+          htmlFor={id}
+          className={`text-gray-700 dark:text-gray-200 select-none`}
+        >
           {label}
         </label>
       )}

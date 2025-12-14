@@ -17,7 +17,9 @@ function UpdatePasswordForm() {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <h3 className="text-lg font-medium mb-4">Update Password</h3>
+      <h3 className="text-lg font-medium mb-4 text-gray-900 dark:text-gray-100">
+        Update Password
+      </h3>
       <Input
         label="New Password"
         type="password"

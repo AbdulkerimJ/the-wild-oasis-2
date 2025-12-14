@@ -1,8 +1,4 @@
-import {
-  HiPencilSquare,
-  HiTrash,
-  HiDocumentDuplicate,
-} from "react-icons/hi2";
+import { HiPencilSquare, HiTrash, HiDocumentDuplicate } from "react-icons/hi2";
 import { formatCurrency } from "../../utils/helpers";
 
 const CabinRow = ({
@@ -16,9 +12,9 @@ const CabinRow = ({
   const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
 
   return (
-    <tr className="hover:bg-gray-50 transition-colors duration-200">
+    <tr className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
       {/* Index */}
-      <td className="px-2 py-3 whitespace-nowrap text-xs font-medium text-gray-900 sm:px-6 sm:py-4">
+      <td className="px-2 py-3 whitespace-nowrap text-xs font-medium text-gray-900 dark:text-gray-100 sm:px-6 sm:py-4">
         {index + 1}
       </td>
 
@@ -33,7 +29,7 @@ const CabinRow = ({
             />
           </div>
           <div className="min-w-0 flex-1">
-            <div className="text-sm font-medium text-gray-900 truncate">
+            <div className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
               {name}
             </div>
           </div>
@@ -41,26 +37,28 @@ const CabinRow = ({
       </td>
 
       {/* Capacity */}
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
         {maxCapacity} guests
       </td>
 
       {/* Price */}
-      <td className="px-2 py-3 whitespace-nowrap text-sm font-semibold text-gray-900 sm:px-6 sm:py-4">
+      <td className="px-2 py-3 whitespace-nowrap text-sm font-semibold text-gray-900 dark:text-gray-100 sm:px-6 sm:py-4">
         {formatCurrency(regularPrice)}
       </td>
 
       {/* Discount */}
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
         {discount > 0 ? (
           <div className="flex flex-col">
             <span className="text-green-600 font-medium">{discount}% off</span>
-            <span className="text-xs text-gray-500">
+            <span className="text-xs text-gray-500 dark:text-gray-400">
               {formatCurrency(regularPrice * (1 - discount / 100))}
             </span>
           </div>
         ) : (
-          <span className="text-gray-400 italic">No discount</span>
+          <span className="text-gray-400 dark:text-gray-500 italic">
+            No discount
+          </span>
         )}
       </td>
 
@@ -70,7 +68,7 @@ const CabinRow = ({
           {/* Duplicate */}
           <button
             aria-label="Duplicate cabin"
-            className="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition-colors duration-200 disabled:opacity-50 sm:p-2"
+            className="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100 dark:hover:text-white transition-colors duration-200 disabled:opacity-50 sm:p-2"
             onClick={() => onDuplicate(cabin)}
             disabled={isCreating}
           >
@@ -80,7 +78,7 @@ const CabinRow = ({
           {/* Edit */}
           <button
             aria-label="Edit cabin"
-            className="p-1.5 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-600 hover:text-blue-800 transition-colors duration-200 sm:p-2"
+            className="p-1.5 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-600 hover:text-blue-800 dark:bg-blue-900 dark:hover:bg-blue-800 dark:text-blue-100 dark:hover:text-white transition-colors duration-200 sm:p-2"
           >
             <HiPencilSquare className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
@@ -90,7 +88,7 @@ const CabinRow = ({
             aria-label="Delete cabin"
             onClick={() => onDelete(id)}
             disabled={isDeleting}
-            className="p-1.5 rounded-lg bg-red-100 hover:bg-red-200 text-red-600 hover:text-red-800 transition-colors duration-200 disabled:opacity-50 sm:p-2"
+            className="p-1.5 rounded-lg bg-red-100 hover:bg-red-200 text-red-600 hover:text-red-800 dark:bg-red-900 dark:hover:bg-red-800 dark:text-red-100 dark:hover:text-white transition-colors duration-200 disabled:opacity-50 sm:p-2"
           >
             <HiTrash className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>

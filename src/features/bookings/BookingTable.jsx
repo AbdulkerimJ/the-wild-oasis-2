@@ -14,9 +14,9 @@ const BookingTable = () => {
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-7xl">
-        <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
-          <table className="min-w-full divide-y divide-gray-200 bg-white text-sm">
-            <thead className="bg-gradient-to-r bg-blue-50">
+        <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800 bg-white dark:bg-gray-900 text-sm">
+            <thead className="bg-gradient-to-r bg-blue-50 dark:bg-gray-800">
               <tr>
                 {[
                   "Cabin",
@@ -32,7 +32,7 @@ const BookingTable = () => {
                 ].map((header) => (
                   <th
                     key={header}
-                    className="px-8 py-3.5 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider whitespace-nowrap"
+                    className="px-8 py-3.5 text-left text-xs font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wider whitespace-nowrap"
                   >
                     {header}
                   </th>
@@ -40,7 +40,7 @@ const BookingTable = () => {
               </tr>
             </thead>
 
-            <tbody className="bg-white divide-y divide-gray-100">
+            <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-800">
               {bookings.map((booking) => (
                 <BookingRow key={booking.id} booking={booking} />
               ))}

@@ -26,8 +26,8 @@ const MainNav = () => {
                 `flex flex-col sm:flex-row items-center sm:items-center sm:justify-start justify-center gap-1 px-1 py-3 text-sm font-medium rounded-lg transition-all w-full
                 ${
                   isActive
-                    ? "bg-gray-100 text-blue-600"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                    ? "bg-gray-100 text-blue-600 dark:bg-gray-800 dark:text-blue-300"
+                    : "text-gray-600 hover:bg-gray-50 hover:text-blue-600 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-blue-300"
                 }`
               }
             >

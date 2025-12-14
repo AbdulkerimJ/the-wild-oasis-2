@@ -15,7 +15,7 @@ const Input = ({
       {label && (
         <label
           htmlFor={id}
-          className="mb-1 md:mb-0 md:w-32 text-sm font-medium text-gray-700"
+          className="mb-1 md:mb-0 md:w-32 text-sm font-medium text-gray-700 dark:text-gray-200"
         >
           {label}
         </label>
@@ -33,19 +33,24 @@ const Input = ({
             {...(register ? register(id, rules) : {})}
             {...props}
             className={`
-              w-full md:w-50 px-4 py-2 rounded-lg text-gray-800 text-sm
-              bg-gray-50 border border-gray-300
+              w-full md:w-50 px-4 py-2 rounded-lg text-gray-800 dark:text-gray-100 text-sm
+              bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700
               focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500
-              placeholder-gray-400
-              disabled:bg-gray-100 disabled:cursor-not-allowed
+              dark:focus:border-indigo-400 dark:focus:ring-indigo-400
+              placeholder-gray-400 dark:placeholder-gray-500
+              disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed
               transition-colors duration-150
               ${icon ? "pl-10" : ""}  /* space for icon */
-              ${error ? "border-rose-500 focus:ring-rose-500" : ""}
+              ${
+                error
+                  ? "border-rose-500 dark:border-rose-500 focus:ring-rose-500"
+                  : ""
+              }
             `}
           />
         </div>
         {error && (
-          <span className="text-sm font-medium text-rose-600 mt-2 block">
+          <span className="text-sm font-medium text-rose-600 dark:text-rose-400 mt-2 block">
             {error.message || error}
           </span>
         )}

@@ -77,19 +77,31 @@ const SalesChart = ({ bookings, numDays }) => {
     };
   });
 
-  const colors = {
-    totalSales: { stroke: "#4f46e5", fill: "#c7d2fe" },
-    extrasSales: { stroke: "#16a34a", fill: "#dcfce7" },
-    text: "#374151",
-    background: "#fff",
-  };
+  const isDark =
+    typeof document !== "undefined" &&
+    document.documentElement.classList.contains("dark");
+  const colors = isDark
+    ? {
+        totalSales: { stroke: "#818cf8", fill: "#4f46e5" },
+        extrasSales: { stroke: "#22c55e", fill: "#16a34a" },
+        text: "#e5e7eb",
+        background: "#111827",
+        grid: "#374151",
+      }
+    : {
+        totalSales: { stroke: "#4f46e5", fill: "#c7d2fe" },
+        extrasSales: { stroke: "#16a34a", fill: "#dcfce7" },
+        text: "#374151",
+        background: "#ffffff",
+        grid: "#e5e7eb",
+      };
   return (
-    <div className="bg-white rounded-md border border-indigo-100 p-4 sm:p-6 h-[50vh]">
-      <div className="mb-6" height= "20%">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight tracking-tight">
+    <div className="bg-white dark:bg-gray-900 rounded-md border border-indigo-100 dark:border-gray-700 p-4 sm:p-6 h-[50vh]">
+      <div className="mb-6" height="20%">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-gray-100 leading-tight tracking-tight">
           Sales Overview
         </h1>
-        <p className="mt-1 text-sm md:text-base text-gray-500">
+        <p className="mt-1 text-sm md:text-base text-gray-500 dark:text-gray-400">
           {format(allDates.at(0), "MMM dd, yyyy")} —{" "}
           {format(allDates.at(-1), "MMM dd, yyyy")}
         </p>
@@ -97,10 +109,33 @@ const SalesChart = ({ bookings, numDays }) => {
 
       <ResponsiveContainer width="100%" height="80%">
         <AreaChart data={data}>
-          <XAxis dataKey="label" />
-          <YAxis unit="$" />
-          <CartesianGrid strokeDasharray="3" />
-          <Tooltip />
+          <XAxis
+            dataKey="label"
+            tick={{ fill: colors.text }}
+            stroke={colors.grid}
+          />
+          <YAxis unit="$" tick={{ fill: colors.text }} stroke={colors.grid} />
+          <CartesianGrid strokeDasharray="3" stroke={colors.grid} />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: isDark
+                ? "rgba(17, 24, 39, 0.95)"
+                : "rgba(255, 255, 255, 0.95)",
+              borderRadius: "6px",
+              border: isDark ? "1px solid #374151" : "1px solid #e5e7eb",
+              padding: "6px 10px",
+              boxShadow: isDark
+                ? "0 1px 3px rgba(255, 255, 255, 0.05)"
+                : "0 1px 3px rgba(0, 0, 0, 0.1)",
+              color: colors.text,
+            }}
+            itemStyle={{ color: colors.text }}
+            labelStyle={{
+              fontWeight: 600,
+              marginBottom: 4,
+              color: colors.text,
+            }}
+          />
           <Area
             dataKey="totalSales"
             type="monotone"

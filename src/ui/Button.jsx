@@ -9,7 +9,7 @@ const baseClasses = `
   font-medium leading-none
   transition-all duration-300 ease-out
   transform hover:scale-[1.03] active:scale-[0.97]
-  focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-white
+  focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900
   disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer
 `;
 
@@ -22,7 +22,8 @@ const variants = {
   secondary: `
     bg-white/80 text-gray-900 border border-gray-300
     hover:bg-gray-100 hover:border-gray-400 hover:shadow-sm
-    focus:ring-gray-300/30
+    dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700 dark:hover:bg-gray-800 dark:hover:border-gray-600
+    focus:ring-gray-300/30 dark:focus:ring-gray-600/40
   `,
   success: `
     bg-gradient-to-r from-emerald-600 via-emerald-700 to-emerald-800 text-white
@@ -37,16 +38,19 @@ const variants = {
   ghost: `
     bg-transparent text-gray-700 border border-gray-300
     hover:bg-gray-100
-    focus:ring-gray-300/40
+    dark:text-gray-100 dark:border-gray-700 dark:hover:bg-gray-800
+    focus:ring-gray-300/40 dark:focus:ring-gray-600/40
   `,
   outline: `
     bg-transparent border-2 border-gray-700 text-gray-800
     hover:bg-gray-800 hover:text-white
-    focus:ring-gray-500/30
+    dark:border-gray-500 dark:text-gray-100 dark:hover:bg-gray-700
+    focus:ring-gray-500/30 dark:focus:ring-gray-600/40
   `,
   link: `
     bg-transparent text-blue-600 underline-offset-4 hover:underline
-    focus:ring-blue-400/30
+    dark:text-blue-300
+    focus:ring-blue-400/30 dark:focus:ring-blue-500/40
   `,
 };
 
@@ -67,12 +71,7 @@ export default function Button({
   `.trim();
 
   return (
-    <button
-      type="button"
-      disabled={disabled}
-      className={classes}
-      {...props}
-    >
+    <button type="button" disabled={disabled} className={classes} {...props}>
       {Icon && <Icon className="w-4 h-4" />}
       <span>{children}</span>
     </button>

@@ -7,11 +7,11 @@ const HeaderMenu = () => {
   const navigate = useNavigate();
 
   return (
-    <ul className="flex items-center gap-4">
+    <ul className="flex items-center gap-4 text-gray-700 dark:text-gray-200">
       <li>
         <button
           onClick={() => navigate("/account")}
-          className="text-gray-700 hover:text-gray-900 flex items-center gap-1 cursor-pointer "
+          className="flex items-center gap-1 cursor-pointer transition-colors hover:text-gray-900 dark:hover:text-gray-400"
         >
           <CiUser className="text-lg" />
           Account

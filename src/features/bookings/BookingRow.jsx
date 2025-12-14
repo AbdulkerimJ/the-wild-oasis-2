@@ -11,13 +11,13 @@ const getStatusClasses = (status) => {
   const lowerStatus = status.toLowerCase();
   switch (lowerStatus) {
     case "unconfirmed":
-      return "bg-blue-100 text-blue-800";
+      return "bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200";
     case "checked-in":
-      return "bg-green-100 text-green-800";
+      return "bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200";
     case "checked-out":
-      return "bg-yellow-100 text-yellow-800";
+      return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-200";
     default:
-      return "bg-gray-100 text-gray-800";
+      return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200";
   }
 };
 
@@ -39,28 +39,28 @@ const BookingRow = ({ booking }) => {
 
   return (
     <tr
-      className="hover:bg-gray-50 transition-colors duration-200 cursor-pointer"
+      className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer"
       onClick={() => navigate(`/bookings/${id}`)}
     >
-      <td className="px-9 py-3.5 text-sm text-gray-500 whitespace-nowrap">
+      <td className="px-9 py-3.5 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
         {cabins.name}
       </td>
-      <td className="px-4 py-3.5 text-sm font-medium text-gray-900 whitespace-nowrap">
+      <td className="px-4 py-3.5 text-sm font-medium text-gray-900 dark:text-gray-100 whitespace-nowrap">
         {guests.fullName}
       </td>
-      <td className="px-8 py-3.5 text-sm text-gray-500 whitespace-nowrap">
+      <td className="px-8 py-3.5 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
         {formatDate(startDate)}
       </td>
-      <td className="px-6 py-3.5 text-sm text-gray-500 whitespace-nowrap">
+      <td className="px-6 py-3.5 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
         {formatDate(endDate)}
       </td>
-      <td className="px-10 py-3.5 text-sm text-gray-500 whitespace-nowrap">
+      <td className="px-10 py-3.5 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
         {numNights}
       </td>
-      <td className="px-10 py-3.5 text-sm text-gray-500 whitespace-nowrap">
+      <td className="px-10 py-3.5 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
         {numGuests}
       </td>
-      <td className="px-10 py-3.5 text-sm font-medium text-gray-900 whitespace-nowrap">
+      <td className="px-10 py-3.5 text-sm font-medium text-gray-900 dark:text-gray-100 whitespace-nowrap">
         ${totalPrice}
       </td>
       <td className="px-4 py-3.5 whitespace-nowrap">
@@ -73,12 +73,20 @@ const BookingRow = ({ booking }) => {
         </span>
       </td>
       <td className="px-14 py-3.5 text-sm whitespace-nowrap">
-        <span className={hasBreakfast ? "text-green-600" : "text-gray-400"}>
+        <span
+          className={
+            hasBreakfast ? "text-green-600" : "text-gray-400 dark:text-gray-500"
+          }
+        >
           {hasBreakfast ? "Yes" : "No"}
         </span>
       </td>
       <td className="px-10 py-3.5 text-sm whitespace-nowrap">
-        <span className={isPaid ? "text-green-600" : "text-red-600"}>
+        <span
+          className={
+            isPaid ? "text-green-600" : "text-red-600 dark:text-red-400"
+          }
+        >
           {isPaid ? "Yes" : "No"}
         </span>
       </td>

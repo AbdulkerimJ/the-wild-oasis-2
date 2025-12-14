@@ -14,7 +14,7 @@ const FileInput = ({
       {label && (
         <label
           htmlFor={id}
-          className="mb-1 md:mb-0 md:w-32 text-sm font-medium text-gray-700"
+          className="mb-1 md:mb-0 md:w-32 text-sm font-medium text-gray-700 dark:text-gray-200"
         >
           {label}
         </label>
@@ -28,7 +28,8 @@ const FileInput = ({
           {...props}
           className={`
             w-full md:w-80
-            text-sm text-gray-600
+            text-sm text-gray-600 dark:text-gray-200
+            bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md
             file:mr-4 file:py-2 file:px-4
             file:rounded-md file:border-0
             file:text-sm file:font-medium
@@ -39,7 +40,7 @@ const FileInput = ({
           `}
         />
         {error && (
-          <span className="text-xs text-red-600 mt-1">
+          <span className="text-xs text-red-600 dark:text-red-400 mt-1">
             {error.message || error}
           </span>
         )}

@@ -31,13 +31,13 @@ const SignupForm = () => {
   return (
     <div className="max-w-2xl mx-auto w-full">
       {/* Heading outside the form */}
-      <h1 className="text-2xl font-semibold text-gray-900 mb-8 text-center">
+      <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-8 text-center">
         Create Employee Account
       </h1>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white p-8 rounded-lg border border-indigo-100 space-y-6"
+        className="bg-white dark:bg-gray-900 p-8 rounded-lg border border-indigo-100 dark:border-gray-700 space-y-6"
       >
         {/* Full Name */}
         <Input
@@ -114,14 +114,14 @@ const SignupForm = () => {
           <button
             type="button"
             onClick={handleCancel}
-            className="px-5 py-2 rounded-md border border-gray-600 text-gray-700 hover:bg-gray-100 transition-all disabled:cursor-not-allowed disabled:opacity-50"
+            className="px-5 py-2 rounded-md border border-gray-600 dark:border-gray-500 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all disabled:cursor-not-allowed disabled:opacity-50"
             disabled={isSigningUp}
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="px-6 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm transition-all disabled:cursor-not-allowed disabled:opacity-50"
+            className="px-6 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 shadow-sm transition-all disabled:cursor-not-allowed disabled:opacity-50"
             disabled={isSigningUp}
           >
             Register

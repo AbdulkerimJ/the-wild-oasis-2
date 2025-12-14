@@ -3,7 +3,7 @@ import Filter from "../../ui/Filter";
 
 function BookingTableOperations() {
   return (
-    <div className="flex flex-wrap justify-end gap-2 mb-4">
+    <div className="flex flex-wrap justify-end gap-2 mb-4 text-gray-900 dark:text-gray-100">
       <Filter
         filterField="status"
         options={[

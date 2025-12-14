@@ -81,12 +81,12 @@ function BookingDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br py-14 px-6 text-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-gray-950 dark:to-gray-900 py-14 px-6 text-gray-800 dark:text-gray-100">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white border border-indigo-100 shadow-sm rounded-3xl px-8 py-6 relative">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white dark:bg-gray-900 border border-indigo-100 dark:border-gray-800 shadow-sm rounded-3xl px-8 py-6 relative">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight text-gray-900 flex items-center gap-4">
+            <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-4">
               Booking #{id}
               <span
                 className={`text-sm font-semibold px-3 py-1 rounded-full border ${getStatusStyle(
@@ -100,7 +100,7 @@ function BookingDetail() {
                   : "Unconfirmed"}
               </span>
             </h1>
-            <p className="text-gray-500 text-sm mt-1">
+            <p className="text-gray-500 dark:text-gray-300 text-sm mt-1">
               Created on {formatDate(created_at)}
             </p>
           </div>
@@ -124,18 +124,18 @@ function BookingDetail() {
         </div>
 
         {/* When Booked */}
-        <div className="bg-white border border-indigo-100 shadow-sm rounded-3xl px-8 py-6 flex items-center gap-4">
-          <div className="p-3 bg-indigo-100 text-indigo-600 rounded-2xl">
+        <div className="bg-white dark:bg-gray-900 border border-indigo-100 dark:border-gray-800 shadow-sm rounded-3xl px-8 py-6 flex items-center gap-4">
+          <div className="p-3 bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-200 rounded-2xl">
             <MdTimer className="text-2xl" />
           </div>
           <div>
-            <h2 className="text-base font-medium text-gray-800">
+            <h2 className="text-base font-medium text-gray-800 dark:text-gray-100">
               Booking Timeline
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               Booked on{" "}
               <span className="font-medium">{formatDate(created_at)}</span> —{" "}
-              <span className="text-indigo-600 font-medium">
+              <span className="text-indigo-600 dark:text-indigo-300 font-medium">
                 {daysAgo === 0
                   ? "today"
                   : daysAgo === 1
@@ -149,7 +149,7 @@ function BookingDetail() {
         {/* Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Guest Info */}
-          <div className="bg-white rounded-3xl border border-indigo-100 shadow-sm p-8 hover:shadow-md transition-all">
+          <div className="bg-white dark:bg-gray-900 rounded-3xl border border-indigo-100 dark:border-gray-800 shadow-sm p-8 hover:shadow-md transition-all">
             <SectionHeader title="Guest Information" icon={<MdPerson />} />
             <div className="space-y-5 mt-6">
               <Info
@@ -173,10 +173,10 @@ function BookingDetail() {
                   <img
                     src={guest.countryFlag}
                     alt={guest.nationality}
-                    className="w-7 h-5 rounded shadow-sm border"
+                    className="w-7 h-5 rounded shadow-sm border border-gray-200 dark:border-gray-700"
                   />
                 )}
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-gray-500 dark:text-gray-300">
                   {guest?.nationality}
                 </span>
               </div>
@@ -184,7 +184,7 @@ function BookingDetail() {
           </div>
 
           {/* Booking Info */}
-          <div className="bg-white rounded-3xl border border-indigo-100 shadow-sm p-8 hover:shadow-md transition-all">
+          <div className="bg-white dark:bg-gray-900 rounded-3xl border border-indigo-100 dark:border-gray-800 shadow-sm p-8 hover:shadow-md transition-all">
             <SectionHeader title="Booking Details" icon={<MdApartment />} />
             <div className="space-y-5">
               <Info label="Cabin" value={cabin?.name} icon={<MdApartment />} />
@@ -246,7 +246,7 @@ function BookingDetail() {
 
           <button
             onClick={moveBack}
-            className="flex items-center gap-2 px-5 py-2 bg-gray-200 text-gray-800 rounded-full shadow-sm hover:bg-gray-300 transition-all duration-300 cursor-pointer"
+            className="flex items-center gap-2 px-5 py-2 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-100 rounded-full shadow-sm hover:bg-gray-300 dark:hover:bg-gray-700 transition-all duration-300 cursor-pointer"
           >
             <MdArrowBack /> Go Back
           </button>
@@ -259,11 +259,13 @@ function BookingDetail() {
 function Stat({ title, value, icon }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="p-3 bg-indigo-100 rounded-2xl text-indigo-600 mb-2">
+      <div className="p-3 bg-indigo-100 dark:bg-indigo-900 rounded-2xl text-indigo-600 dark:text-indigo-200 mb-2">
         {icon}
       </div>
-      <span className="text-xs text-gray-500">{title}</span>
-      <span className="font-medium text-base">{value}</span>
+      <span className="text-xs text-gray-500 dark:text-gray-300">{title}</span>
+      <span className="font-medium text-base text-gray-900 dark:text-gray-100">
+        {value}
+      </span>
     </div>
   );
 }
@@ -271,18 +273,24 @@ function Stat({ title, value, icon }) {
 function SectionHeader({ title, icon }) {
   return (
     <div className="flex items-center gap-3">
-      <div className="p-2 bg-indigo-100 rounded-xl text-indigo-600">{icon}</div>
-      <h2 className="text-base font-medium tracking-tight">{title}</h2>
+      <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-xl text-indigo-600 dark:text-indigo-200">
+        {icon}
+      </div>
+      <h2 className="text-base font-medium tracking-tight text-gray-900 dark:text-gray-100">
+        {title}
+      </h2>
     </div>
   );
 }
 
 function Info({ label, value, icon, color = "text-gray-700" }) {
   return (
-    <div className="flex items-center justify-between border border-indigo-100 rounded-2xl px-5 py-3 hover:bg-indigo-50 transition-all">
+    <div className="flex items-center justify-between border border-indigo-100 dark:border-gray-800 rounded-2xl px-5 py-3 hover:bg-indigo-50 dark:hover:bg-gray-800 transition-all">
       <div className="flex items-center gap-3">
         <div className={`text-base ${color}`}>{icon}</div>
-        <span className="font-normal text-sm text-gray-700">{label}</span>
+        <span className="font-normal text-sm text-gray-700 dark:text-gray-200">
+          {label}
+        </span>
       </div>
       <span className={`font-medium text-sm ${color}`}>{value}</span>
     </div>

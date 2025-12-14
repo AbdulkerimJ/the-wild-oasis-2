@@ -29,16 +29,21 @@ function CreateCabinForm({ onCloseModal }) {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Add new cabin</h3>
-        <p className="text-sm text-gray-500">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+          Add new cabin
+        </h3>
+        <p className="text-sm text-gray-500 dark:text-gray-300">
           Create a cabin listing that will appear on the website.
         </p>
       </div>
 
       <div className="space-y-4">
         {/* Cabin name */}
-        <div className="md:grid md:grid-cols-3 md:items-center gap-4 py-2 border-b border-gray-100">
-          <label htmlFor="name" className="text-sm font-medium text-gray-700">
+        <div className="md:grid md:grid-cols-3 md:items-center gap-4 py-2 border-b border-gray-100 dark:border-gray-800">
+          <label
+            htmlFor="name"
+            className="text-sm font-medium text-gray-700 dark:text-gray-200"
+          >
             Cabin name
           </label>
           <div className="md:col-span-2">
@@ -54,10 +59,10 @@ function CreateCabinForm({ onCloseModal }) {
         </div>
 
         {/* Maximum capacity */}
-        <div className="md:grid md:grid-cols-3 md:items-center gap-4 py-2 border-b border-gray-100">
+        <div className="md:grid md:grid-cols-3 md:items-center gap-4 py-2 border-b border-gray-100 dark:border-gray-800">
           <label
             htmlFor="maxCapacity"
-            className="text-sm font-medium text-gray-700"
+            className="text-sm font-medium text-gray-700 dark:text-gray-200"
           >
             Maximum capacity
           </label>
@@ -74,10 +79,10 @@ function CreateCabinForm({ onCloseModal }) {
         </div>
 
         {/* Regular price */}
-        <div className="md:grid md:grid-cols-3 md:items-center gap-4 py-2 border-b border-gray-100">
+        <div className="md:grid md:grid-cols-3 md:items-center gap-4 py-2 border-b border-gray-100 dark:border-gray-800">
           <label
             htmlFor="regularPrice"
-            className="text-sm font-medium text-gray-700"
+            className="text-sm font-medium text-gray-700 dark:text-gray-200"
           >
             Regular price
           </label>
@@ -97,10 +102,10 @@ function CreateCabinForm({ onCloseModal }) {
         </div>
 
         {/* Discount */}
-        <div className="md:grid md:grid-cols-3 md:items-center gap-4 py-2 border-b border-gray-100">
+        <div className="md:grid md:grid-cols-3 md:items-center gap-4 py-2 border-b border-gray-100 dark:border-gray-800">
           <label
             htmlFor="discount"
-            className="text-sm font-medium text-gray-700"
+            className="text-sm font-medium text-gray-700 dark:text-gray-200"
           >
             Discount
           </label>
@@ -121,10 +126,10 @@ function CreateCabinForm({ onCloseModal }) {
         </div>
 
         {/* Description */}
-        <div className="md:grid md:grid-cols-3 md:items-start gap-4 py-2 border-b border-gray-100">
+        <div className="md:grid md:grid-cols-3 md:items-start gap-4 py-2 border-b border-gray-100 dark:border-gray-800">
           <label
             htmlFor="description"
-            className="text-sm font-medium text-gray-700"
+            className="text-sm font-medium text-gray-700 dark:text-gray-200"
           >
             Description for website
           </label>
@@ -141,8 +146,11 @@ function CreateCabinForm({ onCloseModal }) {
         </div>
 
         {/* File upload */}
-        <div className="md:grid md:grid-cols-3 md:items-center gap-4 py-2 border-b border-gray-100">
-          <label htmlFor="image" className="text-sm font-medium text-gray-700">
+        <div className="md:grid md:grid-cols-3 md:items-center gap-4 py-2 border-b border-gray-100 dark:border-gray-800">
+          <label
+            htmlFor="image"
+            className="text-sm font-medium text-gray-700 dark:text-gray-200"
+          >
             Cabin photo
           </label>
           <div className="md:col-span-2">

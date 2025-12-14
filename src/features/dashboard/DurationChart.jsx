@@ -53,11 +53,17 @@ function prepareData(startData, stays) {
 }
 
 const DurationChart = ({ confirmedStays }) => {
-  const data = prepareData(startDataLight, confirmedStays);
+  const isDark =
+    typeof document !== "undefined" &&
+    document.documentElement.classList.contains("dark");
+  const startPalette = isDark ? startDataDark : startDataLight;
+  const data = prepareData(startPalette, confirmedStays);
 
   return (
-    <div className="bg-white rounded-md p-4 border border-indigo-100 flex flex-col h-[40vh] ">
-      <h2 className="text-lg font-semibold text-gray-800 mb-4">Stay Durations</h2>
+    <div className="bg-white dark:bg-gray-900 rounded-md p-4 border border-indigo-100 dark:border-gray-700 flex flex-col h-[40vh] ">
+      <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">
+        Stay Durations
+      </h2>
       <div className="flex-1 min-h-[200px]">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
@@ -76,15 +82,22 @@ const DurationChart = ({ confirmedStays }) => {
             <Tooltip
               formatter={(value, name) => [`${value} stays`, `${name}`]}
               contentStyle={{
-                backgroundColor: "rgba(255, 255, 255, 0.95)",
+                backgroundColor: isDark
+                  ? "rgba(17, 24, 39, 0.95)"
+                  : "rgba(255, 255, 255, 0.95)",
                 borderRadius: "6px",
-                border: "1px solid #e5e7eb",
+                border: isDark ? "1px solid #374151" : "1px solid #e5e7eb",
                 padding: "6px 10px",
-                boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
+                boxShadow: isDark
+                  ? "0 1px 3px rgba(255, 255, 255, 0.05)"
+                  : "0 1px 3px rgba(0, 0, 0, 0.1)",
                 fontSize: "0.85rem",
-                color: "#374151",
+                color: isDark ? "#e5e7eb" : "#374151",
               }}
-              itemStyle={{ color: "#374151", textTransform: "capitalize" }}
+              itemStyle={{
+                color: isDark ? "#e5e7eb" : "#374151",
+                textTransform: "capitalize",
+              }}
               labelStyle={{ fontWeight: 600, marginBottom: 4 }}
             />
             <Legend
@@ -93,7 +106,11 @@ const DurationChart = ({ confirmedStays }) => {
               layout="vertical"
               iconSize={12}
               iconType="circle"
-              wrapperStyle={{ maxHeight: "100%", overflowY: "auto", gap: "0.5rem" }}
+              wrapperStyle={{
+                maxHeight: "100%",
+                overflowY: "auto",
+                gap: "0.5rem",
+              }}
             />
           </PieChart>
         </ResponsiveContainer>

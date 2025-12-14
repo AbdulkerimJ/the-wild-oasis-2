@@ -16,27 +16,33 @@ function UpdateUserDataForm() {
       user_metadata: { fullName: currentFullName },
     },
   } = useUser();
-  const {updateUser, isUpdatingUser} = useUpdateUser();
+  const { updateUser, isUpdatingUser } = useUpdateUser();
 
   const [fullName, setFullName] = useState(currentFullName);
   const [avatar, setAvatar] = useState(null);
 
   function handleSubmit(e) {
     e.preventDefault();
-    if(!fullName) {
+    if (!fullName) {
       toast.error("Full Name is required");
       return;
-    };
-    updateUser({ fullName, avatar }, {
-      onSuccess: () => {
-        setAvatar(null);
-        e.target.reset();
+    }
+    updateUser(
+      { fullName, avatar },
+      {
+        onSuccess: () => {
+          setAvatar(null);
+          e.target.reset();
+        },
       }
-    });
+    );
   }
 
   return (
     <Form onSubmit={handleSubmit}>
+      <h3 className="text-lg font-medium mb-4 text-gray-900 dark:text-gray-100">
+        Update Account Details
+      </h3>
       {/* Email */}
 
       <Input label="Email Address" value={email} disabled />
@@ -65,7 +71,9 @@ function UpdateUserDataForm() {
 
       {/* Buttons */}
       <div className="flex justify-end gap-2 mt-4">
-        <Button type="submit" disabled= {isUpdatingUser}>Update Account</Button>
+        <Button type="submit" disabled={isUpdatingUser}>
+          Update Account
+        </Button>
       </div>
     </Form>
   );
